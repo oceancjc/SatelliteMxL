@@ -1,0 +1,976 @@
+
+-- File Name : Satesignalmon
+-- Date      : Thu Apr 06 23:35:11 CST 2017
+-- Author    : AdventNet Agent Toolkit C Edition - MibEditor 6
+
+
+
+Satesingalmon	DEFINITIONS ::= BEGIN
+	IMPORTS
+		RowStatus, DisplayString
+			FROM SNMPv2-TC
+		DisplayString
+			FROM RFC1213-MIB
+		enterprises, MODULE-IDENTITY, OBJECT-TYPE, Integer32, NOTIFICATION-TYPE
+			FROM SNMPv2-SMI;
+	-- 1.3.6.1.4.1.71200
+	ruigy	MODULE-IDENTITY
+		LAST-UPDATED	"201506082232Z"
+		ORGANIZATION	"Organization"
+		CONTACT-INFO	"Contact-info"
+		DESCRIPTION		"Description"
+		REVISION		"201704062035Z"
+		DESCRIPTION		""
+		::=  {  enterprises  71200  }
+
+
+	devip	OBJECT IDENTIFIER
+		::=  {  ruigy  1  }
+
+	sateTable	OBJECT-TYPE
+		SYNTAX		SEQUENCE  OF  SateEntry
+		MAX-ACCESS	not-accessible
+		STATUS		current
+		DESCRIPTION	"Description"
+		::=  { ruigy  2 }
+
+	sateEntry	OBJECT-TYPE
+		SYNTAX		SateEntry
+		MAX-ACCESS	not-accessible
+		STATUS		current
+		DESCRIPTION	"Row Description"
+		INDEX		{  index  }
+		::=  { sateTable 1 }
+
+	SateEntry  ::=  SEQUENCE {
+		saterowstatus  RowStatus,
+		inputport  Integer32,
+		mode  Integer32,
+		frequency  Integer32,
+		modulation  Integer32,
+		symbolrate  Integer32,
+		fec  Integer32,
+		spectrum  Integer32,
+		rolloff  Integer32,
+		pilot  Integer32,
+		freqSearchRange  Integer32,
+		reserve1  DisplayString,
+		reserve2  DisplayString,
+		reserve3  DisplayString,
+		reserve4  DisplayString,
+		reserve5  DisplayString,
+		reserve6  DisplayString,
+		reserve7  DisplayString,
+		reserve8  DisplayString,
+		rxpwr  Integer32,
+		snr  Integer32,
+		mer  Integer32,
+		evm  Integer32,
+		ebn0  Integer32,
+		freqoffset  Integer32,
+		symoffset  Integer32,
+		agclock  Integer32,
+		feclock  Integer32,
+		corrRsErrorsSDSS  Integer32,
+		rsErrorsSDSS  Integer32,
+		berWindowSDSS  Integer32,
+		berCountSDSS  Integer32,
+		corrRsErrors1SDSS  Integer32,
+		rsErrors1SDSS  Integer32,
+		berWindowIter1SDSS  Integer32,
+		berCountIter1SDSS  Integer32,
+		crcErrorsS2  Integer32,
+		packetErrorCountS2  Integer32,
+		totalPacketsS2  Integer32,
+		ber  Integer32,
+		reserve11  DisplayString,
+		reserve12  DisplayString,
+		reserve13  DisplayString,
+		index  Integer32,
+		sateapply  Integer32
+		}
+
+
+	saterowstatus	OBJECT-TYPE	
+		SYNTAX			RowStatus
+		MAX-ACCESS		read-create
+		STATUS			current
+		DESCRIPTION		"Column Description"
+		::=  {  sateEntry  1  }
+
+
+	inputport	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"input signal port for 1 or 2"
+		::=  {  sateEntry  2  }
+
+
+	mode	OBJECT-TYPE	
+		SYNTAX			Integer32  ( -2147483648 .. 2147483647  ) 
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"0, // DSS broadcast mode
+1, // DVB-S broadcast mode
+2, // DVB-S2 broadcast mode"
+		DEFVAL			{ 1 }
+		::=  {  sateEntry  3  }
+
+
+	frequency	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"In khz"
+		::=  {  sateEntry  4  }
+
+
+	modulation	OBJECT-TYPE	
+		SYNTAX			Integer32  ( -2147483648 .. 2147483647  ) 
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"AUTO = 0,
+QPSK=1,
+8PSK=2"
+		DEFVAL			{ 0 }
+		::=  {  sateEntry  5  }
+
+
+	symbolrate	OBJECT-TYPE	
+		SYNTAX			Integer32  ( -2147483648 .. 2147483647  ) 
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"In Ksps"
+		::=  {  sateEntry  6  }
+
+
+	fec	OBJECT-TYPE	
+		SYNTAX			Integer32  ( -2147483648 .. 2147483647  ) 
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"AUTO = 0,
+FEC_1_2=1,
+FEC_3_5=2,
+FEC_2_3=3,
+FEC_3_4=4,
+FEC_4_5=5,
+FEC_5_6=6,
+FEC_6_7=7,
+FEC_7_8=8,
+FEC_8_9=9,
+FEC_9_10=10"
+		DEFVAL			{ 0 }
+		::=  {  sateEntry  7  }
+
+
+	spectrum	OBJECT-TYPE	
+		SYNTAX			Integer32  ( -2147483648 .. 2147483647  ) 
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"SPECTRUM_AUTO = 0,
+SPECTRUM_INVERTED=1,
+SPECTRUM_NON_INVERTED=2"
+		DEFVAL			{ 0 }
+		::=  {  sateEntry  8  }
+
+
+	rolloff	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"AUTO = 0,
+0_20=1,
+0_25=2,
+0_35=3"
+		DEFVAL			{ 0 }
+		::=  {  sateEntry  9  }
+
+
+	pilot	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"PILOTS_OFF = 0,
+PILOTS_ON=1,
+PILOTS_AUTO=2"
+		DEFVAL			{ 2 }
+		::=  {  sateEntry  10  }
+
+
+	freqSearchRange	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"In khz"
+		DEFVAL			{ 6000 }
+		::=  {  sateEntry  11  }
+
+
+	reserve1	OBJECT-TYPE	
+		SYNTAX			DisplayString
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  sateEntry  12  }
+
+
+	reserve2	OBJECT-TYPE	
+		SYNTAX			DisplayString  ( SIZE ( 0 .. 255  ) ) 
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  sateEntry  13  }
+
+
+	reserve3	OBJECT-TYPE	
+		SYNTAX			DisplayString  ( SIZE ( 0 .. 255  ) ) 
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  sateEntry  14  }
+
+
+	reserve4	OBJECT-TYPE	
+		SYNTAX			DisplayString
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  sateEntry  15  }
+
+
+	reserve5	OBJECT-TYPE	
+		SYNTAX			DisplayString
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  sateEntry  16  }
+
+
+	reserve6	OBJECT-TYPE	
+		SYNTAX			DisplayString
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  sateEntry  17  }
+
+
+	reserve7	OBJECT-TYPE	
+		SYNTAX			DisplayString  ( SIZE ( 0 .. 255  ) ) 
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  sateEntry  18  }
+
+
+	reserve8	OBJECT-TYPE	
+		SYNTAX			DisplayString
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  sateEntry  19  }
+
+
+	rxpwr	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"In 0.1 dBuv"
+		::=  {  sateEntry  20  }
+
+
+	snr	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"In 0.1 dB"
+		::=  {  sateEntry  21  }
+
+
+	mer	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"In 0.1 dB"
+		::=  {  sateEntry  22  }
+
+
+	evm	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"In 0.1"
+		::=  {  sateEntry  23  }
+
+
+	ebn0	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"In 0.1"
+		::=  {  sateEntry  24  }
+
+
+	freqoffset	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"In Hz"
+		::=  {  sateEntry  25  }
+
+
+	symoffset	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"In 1"
+		::=  {  sateEntry  26  }
+
+
+	agclock	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"0:false
+1:true"
+		::=  {  sateEntry  27  }
+
+
+	feclock	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"0:false
+1:true"
+		::=  {  sateEntry  28  }
+
+
+	corrRsErrorsSDSS	OBJECT-TYPE	
+		SYNTAX			Integer32  ( -2147483648 .. 2147483647  ) 
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"Corrected Error Counter"
+		::=  {  sateEntry  29  }
+
+
+	rsErrorsSDSS	OBJECT-TYPE	
+		SYNTAX			Integer32  ( -2147483648 .. 2147483647  ) 
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"RS decoder err counter"
+		::=  {  sateEntry  30  }
+
+
+	berWindowSDSS	OBJECT-TYPE	
+		SYNTAX			Integer32  ( -2147483648 .. 2147483647  ) 
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"Ber Windows"
+		::=  {  sateEntry  31  }
+
+
+	berCountSDSS	OBJECT-TYPE	
+		SYNTAX			Integer32  ( -2147483648 .. 2147483647  ) 
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"BER count"
+		::=  {  sateEntry  32  }
+
+
+	corrRsErrors1SDSS	OBJECT-TYPE	
+		SYNTAX			Integer32  ( -2147483648 .. 2147483647  ) 
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"Corrected Error Counter 1st iteration"
+		::=  {  sateEntry  33  }
+
+
+	rsErrors1SDSS	OBJECT-TYPE	
+		SYNTAX			Integer32  ( -2147483648 .. 2147483647  ) 
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"RS decoder err counter 1st iteration"
+		::=  {  sateEntry  34  }
+
+
+	berWindowIter1SDSS	OBJECT-TYPE	
+		SYNTAX			Integer32  ( -2147483648 .. 2147483647  ) 
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"Ber Windows - post viterbi"
+		::=  {  sateEntry  35  }
+
+
+	berCountIter1SDSS	OBJECT-TYPE	
+		SYNTAX			Integer32  ( -2147483648 .. 2147483647  ) 
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"BER count - post viterbi"
+		::=  {  sateEntry  36  }
+
+
+	crcErrorsS2	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"CRC error counter"
+		::=  {  sateEntry  37  }
+
+
+	packetErrorCountS2	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"Number of packet errors"
+		::=  {  sateEntry  38  }
+
+
+	totalPacketsS2	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"Total packets"
+		::=  {  sateEntry  39  }
+
+
+	ber	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"In a.a*e-7"
+		::=  {  sateEntry  40  }
+
+
+	reserve11	OBJECT-TYPE	
+		SYNTAX			DisplayString
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  sateEntry  41  }
+
+
+	reserve12	OBJECT-TYPE	
+		SYNTAX			DisplayString
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  sateEntry  42  }
+
+
+	reserve13	OBJECT-TYPE	
+		SYNTAX			DisplayString
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  sateEntry  43  }
+
+
+	index	OBJECT-TYPE	
+		SYNTAX			Integer32  ( -2147483648 .. 2147483647  ) 
+		MAX-ACCESS		not-accessible
+		STATUS			current
+		DESCRIPTION		"Column Description"
+		::=  {  sateEntry  99  }
+
+
+	sateapply	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"Set 71202 for changing configuration"
+		::=  {  sateEntry  100  }
+
+	consTable	OBJECT-TYPE
+		SYNTAX		SEQUENCE  OF  ConsEntry
+		MAX-ACCESS	not-accessible
+		STATUS		current
+		DESCRIPTION	"Description"
+		::=  { ruigy  3 }
+
+	consEntry	OBJECT-TYPE
+		SYNTAX		ConsEntry
+		MAX-ACCESS	not-accessible
+		STATUS		current
+		DESCRIPTION	"Row Description"
+		INDEX		{  indexcons  }
+		::=  { consTable 1 }
+
+	ConsEntry  ::=  SEQUENCE {
+		indexcons  Integer32,
+		consrowstatus  RowStatus,
+		consdata1  DisplayString,
+		consdata2  DisplayString,
+		consdata3  DisplayString,
+		consdata4  DisplayString,
+		consdata5  DisplayString,
+		consdata6  DisplayString,
+		consdata7  DisplayString,
+		consdata8  DisplayString
+		}
+
+
+	indexcons	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		not-accessible
+		STATUS			current
+		DESCRIPTION		"Column Description"
+		::=  {  consEntry  1  }
+
+
+	consrowstatus	OBJECT-TYPE	
+		SYNTAX			RowStatus
+		MAX-ACCESS		read-create
+		STATUS			current
+		DESCRIPTION		"Column Description"
+		::=  {  consEntry  2  }
+
+
+	consdata1	OBJECT-TYPE	
+		SYNTAX			DisplayString
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  consEntry  3  }
+
+
+	consdata2	OBJECT-TYPE	
+		SYNTAX			DisplayString
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  consEntry  4  }
+
+
+	consdata3	OBJECT-TYPE	
+		SYNTAX			DisplayString
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  consEntry  5  }
+
+
+	consdata4	OBJECT-TYPE	
+		SYNTAX			DisplayString
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  consEntry  6  }
+
+
+	consdata5	OBJECT-TYPE	
+		SYNTAX			DisplayString
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  consEntry  7  }
+
+
+	consdata6	OBJECT-TYPE	
+		SYNTAX			DisplayString
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  consEntry  8  }
+
+
+	consdata7	OBJECT-TYPE	
+		SYNTAX			DisplayString
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  consEntry  9  }
+
+
+	consdata8	OBJECT-TYPE	
+		SYNTAX			DisplayString
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  consEntry  10  }
+
+	satethTable	OBJECT-TYPE
+		SYNTAX		SEQUENCE  OF  SatethEntry
+		MAX-ACCESS	not-accessible
+		STATUS		current
+		DESCRIPTION	"Description"
+		::=  { ruigy  4 }
+
+	satethEntry	OBJECT-TYPE
+		SYNTAX		SatethEntry
+		MAX-ACCESS	not-accessible
+		STATUS		current
+		DESCRIPTION	"Row Description"
+		INDEX		{  indexth  }
+		::=  { satethTable 1 }
+
+	SatethEntry  ::=  SEQUENCE {
+		indexth  Integer32,
+		satethrowstatus  RowStatus,
+		rxpwrlow  Integer32,
+		rxpwrhigh  Integer32,
+		snrlow  Integer32,
+		merlow  Integer32,
+		evmlow  Integer32,
+		freqoffsetmax  Integer32,
+		symoffsetmax  Integer32,
+		bermax  Integer32,
+		feclockSW  Integer32,
+		agclockSW  Integer32,
+		satethapply  Integer32
+		}
+
+
+	indexth	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		not-accessible
+		STATUS			current
+		DESCRIPTION		"Column Description"
+		::=  {  satethEntry  1  }
+
+
+	satethrowstatus	OBJECT-TYPE	
+		SYNTAX			RowStatus
+		MAX-ACCESS		read-create
+		STATUS			current
+		DESCRIPTION		"Column Description"
+		::=  {  satethEntry  2  }
+
+
+	rxpwrlow	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"In 0.1dBuv"
+		::=  {  satethEntry  3  }
+
+
+	rxpwrhigh	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"In 0.1dBuv"
+		::=  {  satethEntry  4  }
+
+
+	snrlow	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"In 0.1dB"
+		::=  {  satethEntry  5  }
+
+
+	merlow	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"In 0.1dB"
+		::=  {  satethEntry  6  }
+
+
+	evmlow	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"In 0.1dB"
+		::=  {  satethEntry  7  }
+
+
+	freqoffsetmax	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"In Hz"
+		::=  {  satethEntry  8  }
+
+
+	symoffsetmax	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"In bps"
+		::=  {  satethEntry  9  }
+
+
+	bermax	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"To be discus..."
+		::=  {  satethEntry  10  }
+
+
+	feclockSW	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"0:OFF
+1:ON"
+		::=  {  satethEntry  11  }
+
+
+	agclockSW	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"0:OFF
+1:ON"
+		::=  {  satethEntry  12  }
+
+
+	satethapply	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"Set 71202"
+		::=  {  satethEntry  13  }
+
+	trapdstTable	OBJECT-TYPE
+		SYNTAX		SEQUENCE  OF  TrapdstEntry
+		MAX-ACCESS	not-accessible
+		STATUS		current
+		DESCRIPTION	"Description"
+		::=  { ruigy  5 }
+
+	trapdstEntry	OBJECT-TYPE
+		SYNTAX		TrapdstEntry
+		MAX-ACCESS	not-accessible
+		STATUS		current
+		DESCRIPTION	"Row Description"
+		INDEX		{  trapindex  }
+		::=  { trapdstTable 1 }
+
+	TrapdstEntry  ::=  SEQUENCE {
+		trapindex  Integer32,
+		traprowstatus  RowStatus,
+		trapdstip  DisplayString,
+		trapdstport  Integer32
+		}
+
+
+	trapindex	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		not-accessible
+		STATUS			current
+		DESCRIPTION		"Column Description"
+		::=  {  trapdstEntry  1  }
+
+
+	traprowstatus	OBJECT-TYPE	
+		SYNTAX			RowStatus
+		MAX-ACCESS		read-create
+		STATUS			current
+		DESCRIPTION		"Column Description"
+		::=  {  trapdstEntry  2  }
+
+
+	trapdstip	OBJECT-TYPE	
+		SYNTAX			DisplayString
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  trapdstEntry  3  }
+
+
+	trapdstport	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"Description"
+		DEFVAL			{ 162 }
+		::=  {  trapdstEntry  4  }
+
+	trap	OBJECT IDENTIFIER
+		::=  {  ruigy  98  }
+
+	sysdescr	OBJECT IDENTIFIER
+		::=  {  ruigy  99  }
+
+	ipaddr	OBJECT-TYPE	
+		SYNTAX			DisplayString
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  devip  1  }
+
+	submask	OBJECT-TYPE	
+		SYNTAX			DisplayString
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  devip  2  }
+
+	gateway	OBJECT-TYPE	
+		SYNTAX			DisplayString
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  devip  3  }
+
+	apply	OBJECT-TYPE	
+		SYNTAX			Integer32 
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"set the value of 71202 to apply the ip configuration."
+		::=  {  devip  4  }
+
+	status	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"0:alarm start
+1:alarm end"
+		::=  {  trap  1  }
+
+	stringdesc	OBJECT-TYPE	
+		SYNTAX			DisplayString
+		MAX-ACCESS		read-only
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  trap  2  }
+
+	reset	NOTIFICATION-TYPE
+		OBJECTS			{ stringdesc }
+		STATUS			current
+		DESCRIPTION		"reset"
+		::=  {  trap  3  }
+
+	start	NOTIFICATION-TYPE
+		OBJECTS			{ stringdesc }
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  trap  4  }
+
+	rxpwrtrap	NOTIFICATION-TYPE
+		OBJECTS			{ inputport, mode, modulation, frequency, rxpwr, rxpwrlow, rxpwrhigh, status, stringdesc }
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  trap  5  }
+
+	snrtrap	NOTIFICATION-TYPE
+		OBJECTS			{ inputport, mode, modulation, frequency, snr, snrlow, status, stringdesc }
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  trap  6  }
+
+	mertrap	NOTIFICATION-TYPE
+		OBJECTS			{ inputport, mode, modulation, frequency, mer, merlow, status, stringdesc }
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  trap  7  }
+
+	evmtrap	NOTIFICATION-TYPE
+		OBJECTS			{ inputport, mode, modulation, frequency, evm, evmlow, status, stringdesc }
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  trap  8  }
+
+	freqoffsettrap	NOTIFICATION-TYPE
+		OBJECTS			{ inputport, mode, modulation, frequency, freqoffset, freqoffsetmax, status, stringdesc }
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  trap  9  }
+
+	symoffsettrap	NOTIFICATION-TYPE
+		OBJECTS			{ inputport, mode, modulation, frequency, symoffset, symoffsetmax, status, stringdesc }
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  trap  10  }
+
+	agclocktrap	NOTIFICATION-TYPE
+		OBJECTS			{ inputport, mode, modulation, frequency, agclock, status, stringdesc }
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  trap  11  }
+
+	feclocktrap	NOTIFICATION-TYPE
+		OBJECTS			{ inputport, mode, modulation, frequency, feclock, status, stringdesc }
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  trap  12  }
+
+	descrption	OBJECT-TYPE	
+		SYNTAX			DisplayString  ( SIZE ( 0 .. 255  ) ) 
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  sysdescr  1  }
+
+	sysid	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"Description"
+		::=  {  sysdescr  2  }
+
+	sysdescrapply	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"set the value of 71202 to apply the changes"
+		::=  {  sysdescr  3  }
+
+	devmode	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"0:snmp
+1:udp"
+		DEFVAL			{ 0 }
+		::=  {  devip  5  }
+
+	udpTable	OBJECT-TYPE
+		SYNTAX		SEQUENCE  OF  UdpEntry
+		MAX-ACCESS	not-accessible
+		STATUS		current
+		DESCRIPTION	"Description"
+		::=  { ruigy  6 }
+
+	udpEntry	OBJECT-TYPE
+		SYNTAX		UdpEntry
+		MAX-ACCESS	not-accessible
+		STATUS		current
+		DESCRIPTION	"Row Description"
+		INDEX		{  udpindex  }
+		::=  { udpTable 1 }
+
+	UdpEntry  ::=  SEQUENCE {
+		udpindex  Integer32,
+		udprowstatus  RowStatus,
+		ip  DisplayString,
+		port  Integer32
+		}
+
+
+	udpindex	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		not-accessible
+		STATUS			current
+		DESCRIPTION		"Column Description"
+		::=  {  udpEntry  1  }
+
+
+	udprowstatus	OBJECT-TYPE	
+		SYNTAX			RowStatus
+		MAX-ACCESS		read-create
+		STATUS			current
+		DESCRIPTION		"Column Description"
+		::=  {  udpEntry  2  }
+
+
+	ip	OBJECT-TYPE	
+		SYNTAX			DisplayString  ( SIZE ( 0 .. 255  ) ) 
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"Column Description"
+		::=  {  udpEntry  3  }
+
+
+	port	OBJECT-TYPE	
+		SYNTAX			Integer32
+		MAX-ACCESS		read-write
+		STATUS			current
+		DESCRIPTION		"Column Description"
+		::=  {  udpEntry  4  }
+
+END

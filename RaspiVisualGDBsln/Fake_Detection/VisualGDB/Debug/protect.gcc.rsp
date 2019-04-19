@@ -1,0 +1,1 @@
+-I../../source/Midware -I../../../gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32/arm-linux-gnueabihf/include/c++/4.8.3 -ggdb -Wall -O3 -DDEBUG=1 -DDEBUG=1 -ffunction-sections -fdata-sections   -c "C:/SpectrumAnalyzer/source/Midware/protect.c" -o "VisualGDB/Debug/protect.o" -MD -MP -MF "VisualGDB/Debug/protect.dep"

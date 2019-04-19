@@ -1,0 +1,1 @@
+-I../../source/Midware -I../../../gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32/arm-linux-gnueabihf/include/c++/4.8.3 -ggdb -Wall -Wextra -O3 -DNDEBUG=1 -DNDEBUG=1 -DRELEASE=1 -ffunction-sections -fdata-sections   -c "C:/SpectrumAnalyzer/source/FakeDetct/main.cpp" -o "VisualGDB/Release_READ/main.o" -MD -MP -MF "VisualGDB/Release_READ/main.dep"

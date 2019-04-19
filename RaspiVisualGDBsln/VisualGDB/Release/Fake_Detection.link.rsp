@@ -1,0 +1,1 @@
+-o ../VisualGDB/Release/Fake_Detection -Wl,-gc-sections  -Wl,--start-group VisualGDB/Release/main.o VisualGDB/Release/protect.o -Wl,--rpath='$ORIGIN' -Wl,--end-group

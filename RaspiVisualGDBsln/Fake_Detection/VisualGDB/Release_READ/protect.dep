@@ -1,0 +1,140 @@
+VisualGDB/Release_READ/protect.o: \
+ C:/SpectrumAnalyzer/source/Midware/protect.c \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\stdc-predef.h \
+ C:/SpectrumAnalyzer/source/Midware/protect.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\stdio.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\features.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\sys\cdefs.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\wordsize.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\gnu\stubs.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\gnu\stubs-hard.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\lib\gcc\arm-linux-gnueabihf\4.8.3\include\stddef.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\types.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\typesizes.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\libio.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\_g_config.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\wchar.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\lib\gcc\arm-linux-gnueabihf\4.8.3\include\stdarg.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\stdio_lim.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\sys_errlist.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\stdio.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\stdlib.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\waitflags.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\waitstatus.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\endian.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\endian.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\byteswap.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\byteswap-16.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\sys\types.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\time.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\sys\select.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\select.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\sigset.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\time.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\sys\sysmacros.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\pthreadtypes.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\alloca.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\stdlib-bsearch.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\stdlib-float.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\string.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\xlocale.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\string.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\string2.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\sys\time.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\unistd.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\posix_opt.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\environments.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\confname.h \
+ c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\getopt.h
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\stdc-predef.h:
+
+C:/SpectrumAnalyzer/source/Midware/protect.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\stdio.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\features.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\sys\cdefs.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\wordsize.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\gnu\stubs.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\gnu\stubs-hard.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\lib\gcc\arm-linux-gnueabihf\4.8.3\include\stddef.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\types.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\typesizes.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\libio.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\_g_config.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\wchar.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\lib\gcc\arm-linux-gnueabihf\4.8.3\include\stdarg.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\stdio_lim.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\sys_errlist.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\stdio.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\stdlib.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\waitflags.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\waitstatus.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\endian.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\endian.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\byteswap.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\byteswap-16.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\sys\types.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\time.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\sys\select.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\select.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\sigset.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\time.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\sys\sysmacros.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\pthreadtypes.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\alloca.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\stdlib-bsearch.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\stdlib-float.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\string.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\xlocale.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\string.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\string2.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\sys\time.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\unistd.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\posix_opt.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\environments.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\bits\confname.h:
+
+c:\gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_win32\arm-linux-gnueabihf\libc\usr\include\getopt.h:

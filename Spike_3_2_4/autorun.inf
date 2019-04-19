@@ -1,0 +1,5 @@
+[autorun]
+
+icon=Icon.ico
+label=Spike Installer
+open="Spike Installer.msi"
