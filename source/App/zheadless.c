@@ -153,6 +153,7 @@ int main(){
 void *thread_regular(){
     int i = 0;
     printf("Thread Regular create success O(∩_∩)O~~\n");
+    fflush(stdout);
     while(1){
         if ((*dev->satDevice->i2c_status & 1) == 0) {        
             for(i=0;i<MAX_CHANNEL_NUM;i++){

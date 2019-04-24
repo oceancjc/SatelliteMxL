@@ -945,46 +945,56 @@ sateTable_handler(
                 table_entry->inputport     = *request->requestvb->val.integer;
                 break;
             case COLUMN_MODE:
+                dev->sdPtr[table_entry->index]->parachange = 1;
                 table_entry->mode     = *request->requestvb->val.integer;
                 dev->sdPtr[table_entry->index]->standardMask = table_entry->mode; 
                 static_apply[table_entry->index] = 1;
                 break;
             case COLUMN_FREQUENCY:
+                dev->sdPtr[table_entry->index]->parachange = 1;
                 table_entry->frequency     = *request->requestvb->val.integer;
                 dev->sdPtr[table_entry->index]->frequencyInKHz = table_entry->frequency;
                 static_apply[table_entry->index] = 1;
                 break;
             case COLUMN_MODULATION:
+                dev->sdPtr[table_entry->index]->parachange = 1;
                 table_entry->modulation     = *request->requestvb->val.integer;
                 dev->sdPtr[table_entry->index]->modulation = table_entry->modulation;
                 static_apply[table_entry->index] = 1;
                 break;
             case COLUMN_SYMBOLRATE:
+                dev->sdPtr[table_entry->index]->parachange = 1;
                 table_entry->symbolrate     = *request->requestvb->val.integer;
                 dev->sdPtr[table_entry->index]->symbolRateKSps = table_entry->symbolrate;
                 static_apply[table_entry->index] = 1;
+
                 break;
             case COLUMN_FEC:
+                dev->sdPtr[table_entry->index]->parachange = 1;
                 table_entry->fec     = *request->requestvb->val.integer;
                 dev->sdPtr[table_entry->index]->fecFormat = table_entry->fec;
                 static_apply[table_entry->index] = 1;
                 break;
             case COLUMN_SPECTRUM:
+                dev->sdPtr[table_entry->index]->parachange = 1;
                 table_entry->spectrum     = *request->requestvb->val.integer;
                 dev->sdPtr[table_entry->index]->spectrumInfo = table_entry->spectrum;
                 static_apply[table_entry->index] = 1;
                 break;
             case COLUMN_ROLLOFF:
+                dev->sdPtr[table_entry->index]->parachange = 1;
                 table_entry->rolloff     = *request->requestvb->val.integer;
                 dev->sdPtr[table_entry->index]->rollOff = table_entry->rolloff;
                 static_apply[table_entry->index] = 1;
                 break;
             case COLUMN_PILOT:
+                dev->sdPtr[table_entry->index]->parachange = 1;
                 table_entry->pilot     = *request->requestvb->val.integer;
                 dev->sdPtr[table_entry->index]->pilots = table_entry->pilot;
                 static_apply[table_entry->index] = 1;
                 break;
             case COLUMN_FREQSEARCHRANGE:
+                dev->sdPtr[table_entry->index]->parachange = 1;
                 table_entry->freqSearchRange     = *request->requestvb->val.integer;
                 dev->sdPtr[table_entry->index]->freqSearchRangeKHz = table_entry->freqSearchRange;
                 static_apply[table_entry->index] = 1;

@@ -31,7 +31,7 @@ int rpiVersionCheck(){
     return 2;
 }
 
-unsigned int I2C_delay = 100;
+unsigned int I2C_delay = 90;
 
 void get_i2cdelay(){
     FILE *f = popen("cat ./.delay.conf","r");

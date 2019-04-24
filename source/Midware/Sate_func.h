@@ -67,6 +67,7 @@ typedef struct{
     int totalPackets;
     int16_t consti[256];
     int16_t constq[256];
+    volatile uint8_t parachange;
 }SATDATA_t;
 
 typedef struct{

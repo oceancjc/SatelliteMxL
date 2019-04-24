@@ -497,15 +497,21 @@ MXL_STATUS_E getRegularParamters(uint8_t devId, uint8_t demodId, SATDATA_t* sdPt
         MXL_HYDRA_DEBUG("Get Regular Parameter fail in %s, Line %d, status = %d\n", __func__, __LINE__, status);
         return status;
     } 
+    MXL_HYDRA_DEBUG("Is any parameter change here? channel:%d changed %d\n", demodId, sdPtr->parachange);
     if (sdPtr->fecLock == 0){ 
         sdPtr->cfo_Hz = 0;    sdPtr->mer = 0;    sdPtr->pwr_100dbm = 0;    sdPtr->snr = 0;
         return status;
     }
-    status = getfreqparameters(devId, demodId, sdPtr);
-    if (status != MXL_SUCCESS) {
-        MXL_HYDRA_DEBUG("Get Regular Parameter fail in %s, Line %d, status = %d\n", __func__, __LINE__, status);
-        return status;
-    }   
+
+    if (sdPtr->parachange == 0) {
+        MXL_HYDRA_DEBUG("Auto Para is fetching on channel %d\n", demodId);
+        status = getfreqparameters(devId, demodId, sdPtr);
+        if (status != MXL_SUCCESS) {
+            MXL_HYDRA_DEBUG("Get Regular Parameter fail in %s, Line %d, status = %d\n", __func__, __LINE__, status);
+            return status;
+        }   
+    }
+    
     status = getcfo(devId, demodId, &sdPtr->cfo_Hz, &sdPtr->fo_symbol);
     if (status != MXL_SUCCESS) {
         MXL_HYDRA_DEBUG("Get Regular Parameter fail in %s, Line %d, status = %d\n", __func__, __LINE__, status);

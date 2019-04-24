@@ -1,4 +1,3 @@
-
 #include "LoopApp.h"
 
 
@@ -80,6 +79,7 @@ void* mxl_lockDemod_inThread(void* package) {
     status = lock_Demod(pack.loopDevice->satDevice, pack.tunerId, pack.demodId, pack.loopDevice->sdPtr[pack.demodId]);
     if ( status != MXL_SUCCESS)        printf("Error status of lock_Demod in %s of Line %d is %d\n", __func__, __LINE__, status);
     free(package);
+    pack.loopDevice->sdPtr[pack.demodId]->parachange = 0;
     pthread_exit(NULL);
 }
 
@@ -134,7 +134,7 @@ int lockAllDemodsV2(LoopApp_t* device, uint8_t tunerId, uint32_t* lockedchannels
             activechannelMsk |= (1 << node);
             ret = mxl_lockDemodV2(device, 0, (MXL_HYDRA_TUNER_ID_E)tunerId, node % MAX_CHANNEL_NUM);
             if (ret != MXL_SUCCESS) {
-                printf("Node %d Lock Fail, try next ......\n", node);
+                printf("Try to Lock Node %d Fail, status = %d, try next ......\n", node, ret);
                 errchannelMsk |= (1 << node) ;
             }  
         }
@@ -148,7 +148,7 @@ int lockAllDemodsV2(LoopApp_t* device, uint8_t tunerId, uint32_t* lockedchannels
                 lockedchannelMsk |= (1 << node); 
             }    
             else{
-                printf("Node %d Lock Fail, try next ......\n", node);
+                printf("Wait Node %d Lock Fail, status = %d, try next ......\n", node,ret);
                 errchannelMsk |= (1 << node);
             }
         }

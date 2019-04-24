@@ -72,7 +72,7 @@ extern "C" {
 #define MXL_HYDRA_PRINT               printk
 #else
 #define MXL_HYDRA_DEBUG               //printf
-#define MXL_HYDRA_ERROR               printf
+#define MXL_HYDRA_ERROR               //printf
 #define MXL_HYDRA_PRINT               //printf
 #endif
 #endif
