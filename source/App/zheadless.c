@@ -9,6 +9,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <unistd.h>
 #include "MxLWare_HYDRA_DeviceApi.h"
 #include "gpio_i2c.h"
 #include "Net_Conf.h"
@@ -55,7 +56,7 @@ RETSIGTYPE stop_server(int __attribute__((unused)) a) {
 void *thread_cpu();
 void *thread_conste0();
 void *thread_regular();
-
+void *thread_UDP();
 
 
 int main(){
@@ -125,8 +126,10 @@ int main(){
 
     if ((pthread_create(&thread[0], NULL, thread_conste0, NULL)) != 0)    printf("Thread Conste create fail ...\n");
     else    ;
-    if ((pthread_create(&thread[4], NULL, thread_regular, NULL)) != 0)    printf("Thread Regular create fail ...\n");       
+    if ((pthread_create(&thread[1], NULL, thread_regular, NULL)) != 0)    printf("Thread Regular create fail ...\n");       
     else    ;
+    if ((pthread_create(&thread[2], NULL, thread_UDP, NULL)) != 0)        printf("Thread UDP create fail ...\n");
+    else ;
 #endif // DEBUG_BYPASS_MXL582
 
 
@@ -201,55 +204,71 @@ void *thread_cpu(){
 
 }
 
+enum SOCK_STATE
+{
+    SOCK_INIT = 0,
+    SOCK_BIND,
+    SOCK_WORK,
+    SOCK_CLOSE
+};
 
-//    /*Try to lock one channel for testing*/
-//    dev->sdPtr[0]->frequencyInKHz = 994000;
-//    dev->sdPtr[0]->standardMask = MXL_HYDRA_DVBS2;
-//    dev->sdPtr[0]->symbolRateKSps = 45000;
-//    dev->sdPtr[0]->freqSearchRangeKHz = 10000;
-//    dev->sdPtr[1]->frequencyInKHz = 994000;
-//    dev->sdPtr[1]->standardMask = MXL_HYDRA_DVBS2;
-//    dev->sdPtr[1]->symbolRateKSps = 45000;
-//    dev->sdPtr[1]->freqSearchRangeKHz = 10000;
-//    dev->sdPtr[2]->frequencyInKHz = 994000;
-//    dev->sdPtr[2]->standardMask = MXL_HYDRA_DVBS2;
-//    dev->sdPtr[2]->symbolRateKSps = 45000;
-//    dev->sdPtr[2]->freqSearchRangeKHz = 10000;
-//    if ((status = mxl_lockDemodV2(dev, 1, MXL_HYDRA_TUNER_ID_0, MXL_HYDRA_DEMOD_ID_0)) != 0) {
-//        printf("Lock Demod failuer with status = %d\n", status);
-//        return -1;
-//    } 
-//    if ((status = mxl_lockDemodV2(dev, 1, MXL_HYDRA_TUNER_ID_0, MXL_HYDRA_DEMOD_ID_1)) != 0) {
-//        printf("Lock Demod failuer with status = %d\n", status);
-//        return -1;
-//    } 
-//    if ((status = mxl_lockDemodV2(dev, 1, MXL_HYDRA_TUNER_ID_0, MXL_HYDRA_DEMOD_ID_2)) != 0) {
-//        printf("Lock Demod failuer with status = %d\n", status);
-//        return -1;
-//    } 
-//    int cnt = 0;
-//    do{
-//        MxLWare_HYDRA_OEM_SleepInMs(100);
-//        getlockstatus(dev->satDevice->devId, MXL_HYDRA_DEMOD_ID_0, &(dev->sdPtr[MXL_HYDRA_DEMOD_ID_0]->fecLock)); 
-//    } while (!dev->sdPtr[MXL_HYDRA_DEMOD_ID_0]->fecLock && ++cnt < 10);
-//    if (cnt > 10 && !dev->sdPtr[MXL_HYDRA_DEMOD_ID_0]->fecLock)    printf("Lock Demod %d Time out\n", MXL_HYDRA_DEMOD_ID_0);
-//    else                                                            printf("Lock Demod %d Success\n", MXL_HYDRA_DEMOD_ID_0);
-//    cnt = 0;
-//    do {
-//        MxLWare_HYDRA_OEM_SleepInMs(100);
-//        getlockstatus(dev->satDevice->devId, MXL_HYDRA_DEMOD_ID_1, &(dev->sdPtr[MXL_HYDRA_DEMOD_ID_1]->fecLock)); 
-//    } while (!dev->sdPtr[MXL_HYDRA_DEMOD_ID_0]->fecLock && ++cnt < 10);
-//    if (cnt == 10 && !dev->sdPtr[MXL_HYDRA_DEMOD_ID_0]->fecLock)    printf("Lock Demod %d Time out\n", MXL_HYDRA_DEMOD_ID_1);
-//    else                                                            printf("Lock Demod %d Success\n", MXL_HYDRA_DEMOD_ID_1);
-//    cnt = 0;
-//    do {
-//        MxLWare_HYDRA_OEM_SleepInMs(100);
-//        getlockstatus(dev->satDevice->devId, MXL_HYDRA_DEMOD_ID_2, &(dev->sdPtr[MXL_HYDRA_DEMOD_ID_2]->fecLock)); 
-//    } while (!dev->sdPtr[MXL_HYDRA_DEMOD_ID_0]->fecLock && ++cnt < 10);
-//    if (cnt == 10 && !dev->sdPtr[MXL_HYDRA_DEMOD_ID_0]->fecLock)    printf("Lock Demod %d Time out\n", MXL_HYDRA_DEMOD_ID_2);
-//    else                                                            printf("Lock Demod %d Success\n", MXL_HYDRA_DEMOD_ID_2);
-//
-//    
-//    status = getRegularParamters(dev->satDevice->devId, MXL_HYDRA_DEMOD_ID_0, dev->sdPtr[0]);
+
+void *thread_UDP(){
+    uint8_t state = SOCK_INIT;    int sock_client = 0;
+    struct sockaddr_in server = { 0 }, client = { 0 };
+    socklen_t client_addr_length = sizeof(client);
+    char buf[16] = { 0 };
+    char opcode[16] = { 0 };
+    int opdata = 0, rcv = 0;
+    while (1){
+        switch (state){
+            case SOCK_INIT:
+                sock_client = socket(AF_INET, SOCK_DGRAM, 0);
+                if (sock_client < 0) {
+                    printf("Creat UDP socket fail, thread ends\n");
+                    pthread_exit(NULL);
+                }
+                server.sin_family = AF_INET;
+                server.sin_addr.s_addr = INADDR_ANY;
+                server.sin_port = htons(UDP_RECEIVEPORT);
+                int on = 1;  
+                if ((setsockopt(sock_client, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on))) < 0) {  
+                    perror("setsockopt failed");  
+                    pthread_exit(NULL);  
+                } 
+                state = SOCK_BIND;
+            
+            case SOCK_BIND:
+                if (bind(sock_client, (struct sockaddr *)&server, sizeof(server)) < 0) {
+                    perror("Bind Failed");
+                    break;
+                }
+                state = SOCK_WORK;
+        
+            case SOCK_WORK:
+            if (recvfrom(sock_client, buf, sizeof(buf), 0, (struct sockaddr*)&client, &client_addr_length) < 0) {
+                //?why always 0
+                perror("Receving Failed");
+                break;
+            }
+            else {
+                rcv = cmdAnalysis(buf, opcode, &opdata);
+                if (rcv == 1) {
+                    if (strstr(opcode, "end")) ;
+                    else    printf("Invalid Command: %s\n", opcode);
+                }
+                else if (rcv == 2) {
+                    if (strstr(opcode, "start")) ;
+                    else    printf("Invalid Command: %s, data= %d\n", opcode, opdata);
+                }
+                else    printf("Unknown received, rcv_num=%d, buf=%s\n", rcv, buf);
+            }    
+        }
+        
+        
+        
+    }
+
+}
 
 

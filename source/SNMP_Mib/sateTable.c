@@ -121,10 +121,9 @@ struct sateTable_entry {
     long packetErrorCountS2;
     long totalPacketsS2;
     long ber;
-    char reserve11[32];
+    long reserve11;
     char reserve12[32];
     char reserve13[32];
-    long reserve11_len;
     long reserve12_len;
     long reserve13_len;
     long sateapply;
@@ -156,8 +155,7 @@ sateTable_createEntry(
     entry->reserve3_len = STRLEN;     entry->reserve4_len = STRLEN;
     entry->reserve5_len = STRLEN;     entry->reserve6_len = STRLEN;
     entry->reserve7_len = STRLEN;     entry->reserve8_len = STRLEN;
-    entry->reserve11_len = STRLEN;    entry->reserve12_len = STRLEN;
-    entry->reserve13_len = STRLEN;   
+    entry->reserve12_len = STRLEN;    entry->reserve13_len = STRLEN;   
     return entry;
 }
 
@@ -648,7 +646,7 @@ sateTable_handler(
                                               SNMP_NOSUCHINSTANCE);
                     continue;
                 }
-                table_entry->ber = dev->sdPtr[table_entry->index]->ber_1e_7;
+                table_entry->ber = dev->sdPtr[table_entry->index]->preber_1e_7;
                 snmp_set_var_typed_integer( request->requestvb, ASN_INTEGER,
                                             table_entry->ber);
                 break;
@@ -658,10 +656,9 @@ sateTable_handler(
                                               SNMP_NOSUCHINSTANCE);
                     continue;
                 }
-                strcpy(table_entry->reserve11,"Reserve11_empty");
-                snmp_set_var_typed_value( request->requestvb, ASN_OCTET_STR,
-                                          table_entry->reserve11,
-                                          table_entry->reserve11_len);
+                table_entry->reserve11 = dev->sdPtr[table_entry->index]->postber_1e_7;
+                snmp_set_var_typed_integer( request->requestvb, ASN_INTEGER,
+                                            table_entry->reserve11);
                 break;
             case COLUMN_RESERVE12:
                 if ( !table_entry ) {

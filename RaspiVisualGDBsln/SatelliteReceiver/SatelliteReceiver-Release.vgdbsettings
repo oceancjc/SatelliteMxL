@@ -32,9 +32,8 @@
         <string>*.txt</string>
         <string>*.cmake</string>
       </FileMasks>
-      <TransferNewFilesOnly>true</TransferNewFilesOnly>
+      <TransferNewFilesOnly>false</TransferNewFilesOnly>
       <IncludeSubdirectories>true</IncludeSubdirectories>
-      <SelectedDirectories />
       <DeleteDisappearedFiles>true</DeleteDisappearedFiles>
       <ApplyGlobalExclusionList>true</ApplyGlobalExclusionList>
     </MainSourceTransferCommand>
@@ -132,6 +131,7 @@
         <WorkingDirectory>$(BuildDir)</WorkingDirectory>
         <Environment>
           <Records />
+          <EnvironmentSetupFiles />
         </Environment>
         <BackgroundMode>false</BackgroundMode>
       </CustomActionBase>

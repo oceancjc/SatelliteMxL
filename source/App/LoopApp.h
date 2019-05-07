@@ -34,6 +34,8 @@
 extern "C" {
 #endif
 
+#define UDP_RECEIVEPORT  13898
+#define UDP_TRANSMITPORT 13899
 
     
 typedef struct LoopApp_t LoopApp_t;
@@ -57,6 +59,9 @@ void regular_checkPerChannel(uint8_t devId, uint8_t demodId, SATDATA_t* sdPtr, S
 void snmp_server_init(const char* app_name);
 void snmp_server_loop(int blockinterval_second);
 void snmp_server_close(const char* app_name);
+    
+int framerParam(LoopApp_t* dev, char* frame); 
+int cmdAnalysis(char* cmd, char* opcode, int* opdata);
 
     
 #ifdef __cplusplus

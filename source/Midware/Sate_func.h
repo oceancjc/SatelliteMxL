@@ -53,7 +53,8 @@ typedef struct{
     int ebn0;
     int cfo_Hz;
     int fo_symbol;
-    int ber_1e_7;
+    int preber_1e_7;
+    int postber_1e_7;
     int corrRsErrors;
     int rsErrors;
     int berWindow;

@@ -83,7 +83,7 @@ Satesingalmon	DEFINITIONS ::= BEGIN
 		packetErrorCountS2  Integer32,
 		totalPacketsS2  Integer32,
 		ber  Integer32,
-		reserve11  DisplayString,
+		reserve11  Integer32,
 		reserve12  DisplayString,
 		reserve13  DisplayString,
 		index  Integer32,
@@ -442,10 +442,10 @@ PILOTS_AUTO=2"
 
 
 	reserve11	OBJECT-TYPE	
-		SYNTAX			DisplayString
+		SYNTAX			Integer32
 		MAX-ACCESS		read-only
 		STATUS			current
-		DESCRIPTION		"Description"
+		DESCRIPTION		"PostBER In a.a*e-7"
 		::=  {  sateEntry  41  }
 
 

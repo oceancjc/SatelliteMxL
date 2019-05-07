@@ -101,7 +101,7 @@ MXL_STATUS_E mxl_lockDemodV2(LoopApp_t* dev, uint8_t update, MXL_HYDRA_TUNER_ID_
     }
     pack->loopDevice = dev; pack->tunerId = tunerId; pack->demodId = demodId; pack->updateFlag = update;
     dev->sdPtr[demodId]->fecLock = 0; dev->sdPtr[demodId]->pwr_100dbm = 0; dev->sdPtr[demodId]->snr = 0;
-    dev->sdPtr[demodId]->cfo_Hz = 0; dev->sdPtr[demodId]->fo_symbol = 0; dev->sdPtr[demodId]->ber_1e_7 = 0;
+    dev->sdPtr[demodId]->cfo_Hz = 0; dev->sdPtr[demodId]->fo_symbol = 0; dev->sdPtr[demodId]->preber_1e_7 = 0;
     dev->sdPtr[demodId]->corrRsErrors = 0; dev->sdPtr[demodId]->rsErrors = 0; dev->sdPtr[demodId]->berWindow = 0;
     dev->sdPtr[demodId]->berCount = 0; dev->sdPtr[demodId]->corrRsErrors1 = 0; dev->sdPtr[demodId]->rsErrors1 = 0;
     dev->sdPtr[demodId]->berWindow_Iter1 = 0; dev->sdPtr[demodId]->berCount_Iter1 = 0;
@@ -225,23 +225,17 @@ void regular_checkPerChannel(uint8_t devId, uint8_t demodId, SATDATA_t* sdPtr, S
     }
     
 
-    if (sdPtr->ber_1e_7 < sdth->berMax && (flag[demodId] & BERHIGHMSK))
+    if (sdPtr->preber_1e_7 < sdth->berMax && (flag[demodId] & BERHIGHMSK))
     {
         send_mertrap_trap(demodId, "BER Recover");
         flag[demodId] &= ~(uint32_t)BERHIGHMSK;
     }
-    else if (sdPtr->ber_1e_7 >= sdth->berMax && !(flag[demodId] & BERHIGHMSK)) {
+    else if (sdPtr->preber_1e_7 >= sdth->berMax && !(flag[demodId] & BERHIGHMSK)) {
         send_mertrap_trap(demodId, "BER Large");
         flag[demodId] |= (uint32_t)BERHIGHMSK;        
     }
     
 }
-
-
-
-
-
-
 
 
 
@@ -282,5 +276,40 @@ void snmp_server_close(const char* app_name){
 
 
 
+/* frame format: #$PW#$SNR#$BER#$POSTBER */
+int framerParam(LoopApp_t* dev,char* frame) {
+    uint8_t i = 0;
+    if (dev == NULL || frame == NULL)    return -1;
+    char subframePWR[256] = { 0 }, subframeSNR[256] = { 0 },
+         subframeBER[256] = { 0 }, subframePOSTBER[256] = { 0 };
+    sprintf(subframePWR, "#$%d$%%%d$%%%d$%%%d$%%%d$%%%d$%%%d$%%%d", 
+            dev->sdPtr[0]->pwr_100dbm, dev->sdPtr[1]->pwr_100dbm,
+            dev->sdPtr[2]->pwr_100dbm, dev->sdPtr[3]->pwr_100dbm,
+            dev->sdPtr[4]->pwr_100dbm, dev->sdPtr[5]->pwr_100dbm,
+            dev->sdPtr[6]->pwr_100dbm, dev->sdPtr[7]->pwr_100dbm);
+    sprintf(subframeSNR, "#$%d$%%%d$%%%d$%%%d$%%%d$%%%d$%%%d$%%%d", 
+            dev->sdPtr[0]->snr, dev->sdPtr[1]->snr,
+            dev->sdPtr[2]->snr, dev->sdPtr[3]->snr,
+            dev->sdPtr[4]->snr, dev->sdPtr[5]->snr,
+            dev->sdPtr[6]->snr, dev->sdPtr[7]->snr);
+    sprintf(subframeBER, "#$%d$%%%d$%%%d$%%%d$%%%d$%%%d$%%%d$%%%d", 
+            dev->sdPtr[0]->preber_1e_7, dev->sdPtr[1]->preber_1e_7,
+            dev->sdPtr[2]->preber_1e_7, dev->sdPtr[3]->preber_1e_7,
+            dev->sdPtr[4]->preber_1e_7, dev->sdPtr[5]->preber_1e_7,
+            dev->sdPtr[6]->preber_1e_7, dev->sdPtr[7]->preber_1e_7);
+    sprintf(subframePOSTBER, "#$%d$%%%d$%%%d$%%%d$%%%d$%%%d$%%%d$%%%d", 
+            dev->sdPtr[0]->postber_1e_7, dev->sdPtr[1]->postber_1e_7,
+            dev->sdPtr[2]->postber_1e_7, dev->sdPtr[3]->postber_1e_7,
+            dev->sdPtr[4]->postber_1e_7, dev->sdPtr[5]->postber_1e_7,
+            dev->sdPtr[6]->postber_1e_7, dev->sdPtr[7]->postber_1e_7);
+    sprintf(frame, "%s%s%s%s", subframePWR, subframeSNR, subframeBER, subframePOSTBER);
+    return 0;
+    
+}
 
 
+
+int cmdAnalysis(char* cmd, char* opcode, int* opdata){
+    if (opcode == NULL || opdata == NULL || cmd == NULL)    return -1;
+    return sscanf(cmd, "#$%s#$%d#$", opcode, opdata);
+}

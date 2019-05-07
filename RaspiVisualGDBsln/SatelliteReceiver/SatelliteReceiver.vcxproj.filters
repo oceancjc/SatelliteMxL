@@ -69,9 +69,6 @@
     <ClCompile Include="..\..\source\Midware\protect.c">
       <Filter>Source files\source\Midware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Midware\Sate_func.c">
-      <Filter>Source files\source\Midware</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\MxL582Driver\MxLWare_FW_Download.c">
       <Filter>Source files\source\MxL582Driver</Filter>
     </ClCompile>
@@ -179,9 +176,6 @@
     <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_DiseqcFskApi.h">
       <Filter>Header files\source\MxL582Driver</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_OEM_Defines.h">
-      <Filter>Header files\source\MxL582Driver</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_OEM_Drv.h">
       <Filter>Header files\source\MxL582Driver</Filter>
     </ClInclude>
@@ -233,6 +227,9 @@
     <ClInclude Include="..\..\source\Midware\devip.h">
       <Filter>Header files\source\SNMP_Mib</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_OEM_Defines.h">
+      <Filter>Header files\source\MxL582Driver</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\App\LoopApp.c">
@@ -240,6 +237,9 @@
     </ClCompile>
     <ClCompile Include="..\..\source\SNMP_Mib\devip.c">
       <Filter>Source files\source\SNMP_Mib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Midware\Sate_func.c">
+      <Filter>Source files\source\Midware</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

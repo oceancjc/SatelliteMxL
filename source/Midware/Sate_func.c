@@ -267,7 +267,7 @@ MXL_STATUS_E getebn0(uint8_t devId, int demodId, SATDATA_t* sdPtr){
     if (sdPtr->rollOff == MXL_HYDRA_ROLLOFF_0_25)         rolloff = 1.25;
     else if (sdPtr->rollOff == MXL_HYDRA_ROLLOFF_0_35)    rolloff = 1.35;
     if (sdPtr->snr == 0 || sdPtr->rollOff == 0)   return MXL_INVALID_PARAMETER;
-    sdPtr->ebn0 = sdPtr->snr + 10*log10(sdPtr->rollOff / modulation);
+    sdPtr->ebn0 = sdPtr->snr + 1000*log10(rolloff / modulation);
     return MXL_SUCCESS;
 }
 
@@ -293,7 +293,8 @@ MXL_STATUS_E getberErrcounters(uint8_t devId, int demodId, SATDATA_t* sdPtr ){
                 sdPtr->rsErrors1       = demodStatusPtr->u.demodStatus_DSS.rsErrors1;
                 sdPtr->berWindow_Iter1 = demodStatusPtr->u.demodStatus_DSS.berWindow_Iter1;
                 sdPtr->berCount_Iter1  = demodStatusPtr->u.demodStatus_DSS.berCount_Iter1;
-                sdPtr->ber_1e_7 = (10000000.0 * demodStatusPtr->u.demodStatus_DSS.berCount) / demodStatusPtr->u.demodStatus_DSS.berWindow;
+                sdPtr->preber_1e_7 = (10000000.0 * demodStatusPtr->u.demodStatus_DSS.berCount) / demodStatusPtr->u.demodStatus_DSS.berWindow;
+                sdPtr->postber_1e_7 = sdPtr->preber_1e_7;
                 break;
             case MXL_HYDRA_DVBS:
                 sdPtr->corrRsErrors    = demodStatusPtr->u.demodStatus_DVBS.corrRsErrors;
@@ -304,16 +305,18 @@ MXL_STATUS_E getberErrcounters(uint8_t devId, int demodId, SATDATA_t* sdPtr ){
                 sdPtr->rsErrors1       = demodStatusPtr->u.demodStatus_DVBS.rsErrors1;
                 sdPtr->berWindow_Iter1 = demodStatusPtr->u.demodStatus_DVBS.berWindow_Iter1;
                 sdPtr->berCount_Iter1  = demodStatusPtr->u.demodStatus_DVBS.berCount_Iter1;
-                sdPtr->ber_1e_7 = (10000000.0 * demodStatusPtr->u.demodStatus_DVBS.berCount) / demodStatusPtr->u.demodStatus_DVBS.berWindow;
+                sdPtr->preber_1e_7 = (10000000.0 * demodStatusPtr->u.demodStatus_DVBS.berCount) / demodStatusPtr->u.demodStatus_DVBS.berWindow;
+                sdPtr->postber_1e_7 = sdPtr->preber_1e_7;
                 break;
             case MXL_HYDRA_DVBS2:
                 sdPtr->crcErrors       = demodStatusPtr->u.demodStatus_DVBS2.crcErrors;
                 sdPtr->packetErrorCount= demodStatusPtr->u.demodStatus_DVBS2.packetErrorCount;
                 sdPtr->totalPackets    = demodStatusPtr->u.demodStatus_DVBS2.totalPackets;
-                sdPtr->ber_1e_7 = (10000000.0* demodStatusPtr->u.demodStatus_DVBS2.packetErrorCount) / demodStatusPtr->u.demodStatus_DVBS2.totalPackets;
+                sdPtr->preber_1e_7 = (10000000.0* demodStatusPtr->u.demodStatus_DVBS2.packetErrorCount) / demodStatusPtr->u.demodStatus_DVBS2.totalPackets;
+                sdPtr->postber_1e_7 = (10000000.0* demodStatusPtr->u.demodStatus_DVBS2.crcErrors) / demodStatusPtr->u.demodStatus_DVBS2.totalPackets;
                 break;
             default:
-                sdPtr->ber_1e_7 = 1024;
+                sdPtr->preber_1e_7 = 1024;   sdPtr->postber_1e_7 = 10086;
                 break;
         }
     }
@@ -425,14 +428,14 @@ int reshape(unsigned char high, unsigned char low) {
 
 
 
-int getmer_qpsk(uint8_t devId, int demodId, char **vi, char **vq, SATDATA_t* sdPtr) {
+int getmer_qpsk(uint8_t devId, int demodId, SATDATA_t* sdPtr) {
     int x = 0, y = 0;
     int i = 0;
     float pointx, pointy, pointx_s, pointy_s, mer = 0;
     const float f4 = 4.0;
     for (i = 0; i < 508; i += 2) {
-        x = reshape(vi[demodId][i % 254], vi[demodId][i % 254 + 1]);	
-        y = reshape(vq[demodId][i % 254], vq[demodId][i % 254 + 1]);	
+        x = sdPtr->consti[i];	
+        y = sdPtr->constq[i];	
         if (x == 0 && y == 0)	return 0;
         pointx_s = fabs(x / f4);	
         pointx = (int)pointx_s + 0.5;
@@ -444,6 +447,53 @@ int getmer_qpsk(uint8_t devId, int demodId, char **vi, char **vq, SATDATA_t* sdP
     sdPtr->mer = (int)(mer * 100 / 254);
     return 0;
 
+}
+
+#define min(x,y)({ \
+    typeof(x) _x = (x);    typeof(y) _y = (y);    (void)(&_x == &_y);\
+    _x < _y ? _x : _y;})
+    
+#define max(x,y)({ \
+    typeof(x) _x = (x);    typeof(y) _y = (y);    (void)(&_x == &_y);\
+    _x > _y ? _x : _y;})
+
+
+    
+int getmer_8psk(uint8_t devId, int demodId,  SATDATA_t* sdPtr){
+    //计算MER
+    float MER= 0, MER1= 0, MER2= 0,MER3= 0; //没有球均值之前的MER总和
+    int MER_account = 0, size=0; //有效MER计算点数
+    float tmp_squarei = 0, tmp_squareq = 0, tmp_pwr = 0;
+    const static float PWR_COEFFI = 36.67 * 36.67;
+    const static float VAL_COEFFI = 36.67;
+    if (sdPtr == NULL)    return -1;
+    for (size = 0; size < 256; size++){
+        if (sdPtr->consti[size] != 0 && sdPtr->constq[size] != 0){
+            MER_account++;
+            tmp_squarei = sdPtr->consti[size] * sdPtr->consti[size] / PWR_COEFFI;
+            tmp_squareq = sdPtr->constq[size] * sdPtr->constq[size] / PWR_COEFFI;
+            tmp_pwr = tmp_squarei + tmp_squareq;
+            MER1 = 10*log10(tmp_pwr / (tmp_squarei + (pow((abs)(sdPtr->constq[size]) / VAL_COEFFI - 1, 2))));
+            MER2 = 10*log10(tmp_pwr / (pow(abs(sdPtr->consti[size]) / VAL_COEFFI - 0.7071, 2) + (pow(abs(sdPtr->constq[size]) / VAL_COEFFI - 0.7071, 2)))) ;
+            MER3 = 10*log10(tmp_pwr / (pow(abs(sdPtr->consti[size]) / VAL_COEFFI - 1, 2) + tmp_squareq));
+            MER = MER + max(MER1, max(MER2, MER3));
+//            MXL_HYDRA_PRINT("Raw data IQ= %d, %d\n", sdPtr->consti[size], sdPtr->constq[size]);
+//            MXL_HYDRA_PRINT("PWRIQ = %f, %f, MER1=%f \n", tmp_squarei, tmp_squareq, MER1);
+        }
+    }
+    if (MER_account != 0)        sdPtr->mer = MER * 100 / MER_account;
+    return 0;
+}
+
+
+int getmerevm(uint8_t devId, int demodId, SATDATA_t* sdPtr) {
+    int ret = 0;
+    if (sdPtr == NULL)    return -1;
+    if (sdPtr->standardMask == MXL_HYDRA_MOD_8PSK)    ret = getmer_8psk(devId, demodId, sdPtr);
+    else    ret= getmer_qpsk(devId, demodId, sdPtr);
+    if (ret != MXL_SUCCESS)    return ret;
+    sdPtr->evm = (int)(1000000.0 / sdPtr->mer);
+    return MXL_SUCCESS;
 }
 
 
@@ -527,6 +577,10 @@ MXL_STATUS_E getRegularParamters(uint8_t devId, uint8_t demodId, SATDATA_t* sdPt
         MXL_HYDRA_DEBUG("Get Regular Parameter fail in %s, Line %d, status = %d\n", __func__, __LINE__, status);
     }
     status = getebn0(devId, demodId, sdPtr);
+    if (status != MXL_SUCCESS) {
+        MXL_HYDRA_DEBUG("Get Regular Parameter fail in %s, Line %d, status = %d\n", __func__, __LINE__, status);
+    }
+    status = getmerevm(devId, demodId, sdPtr);
     if (status != MXL_SUCCESS) {
         MXL_HYDRA_DEBUG("Get Regular Parameter fail in %s, Line %d, status = %d\n", __func__, __LINE__, status);
     }

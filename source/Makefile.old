@@ -36,7 +36,7 @@ error:
 	$(error Invalid configuration, please check your inputs)
 endif
 
-SOURCEFILES := App/LoopApp.c App/zheadless.c Midware/devip.c Midware/gpio_i2c.c Midware/Net_Conf.c Midware/protect.c Midware/Sate_func.c MxL582Driver/MxLWare_FW_Download.c MxL582Driver/MxLWare_HYDRA_BERTApi.c MxL582Driver/MxLWare_HYDRA_ChanBondApi.c MxL582Driver/MxLWare_HYDRA_CommonApi.c MxL582Driver/MxLWare_HYDRA_DemodTunerApi.c MxL582Driver/MxLWare_HYDRA_DeviceApi.c MxL582Driver/MxLWare_HYDRA_DiseqcFskApi.c MxL582Driver/MxLWare_HYDRA_OEM_Drv.c MxL582Driver/MxLWare_HYDRA_PhyCtrl.c MxL582Driver/MxLWare_HYDRA_TsMuxCtrlApi.c SNMP_Mib/consTable.c SNMP_Mib/sateTable.c SNMP_Mib/satethTable.c SNMP_Mib/sysdescr.c SNMP_Mib/trap.c SNMP_Mib/udpTable.c
+SOURCEFILES := App/LoopApp.c App/zheadless.c Midware/gpio_i2c.c Midware/Net_Conf.c Midware/protect.c MxL582Driver/MxLWare_FW_Download.c MxL582Driver/MxLWare_HYDRA_BERTApi.c MxL582Driver/MxLWare_HYDRA_ChanBondApi.c MxL582Driver/MxLWare_HYDRA_CommonApi.c MxL582Driver/MxLWare_HYDRA_DemodTunerApi.c MxL582Driver/MxLWare_HYDRA_DeviceApi.c MxL582Driver/MxLWare_HYDRA_DiseqcFskApi.c MxL582Driver/MxLWare_HYDRA_OEM_Drv.c MxL582Driver/MxLWare_HYDRA_PhyCtrl.c MxL582Driver/MxLWare_HYDRA_TsMuxCtrlApi.c SNMP_Mib/consTable.c SNMP_Mib/devip.c SNMP_Mib/sateTable.c SNMP_Mib/satethTable.c SNMP_Mib/sysdescr.c SNMP_Mib/trap.c SNMP_Mib/udpTable.c
 EXTERNAL_LIBS := 
 EXTERNAL_LIBS_COPIED := $(foreach lib, $(EXTERNAL_LIBS),$(BINARYDIR)/$(notdir $(lib)))
 
@@ -190,10 +190,6 @@ $(BINARYDIR)/zheadless.o : App/zheadless.c $(all_make_files) |$(BINARYDIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -MD -MF $(@:.o=.dep)
 
 
-$(BINARYDIR)/devip.o : Midware/devip.c $(all_make_files) |$(BINARYDIR)
-	$(CC) $(CFLAGS) -c $< -o $@ -MD -MF $(@:.o=.dep)
-
-
 $(BINARYDIR)/gpio_i2c.o : Midware/gpio_i2c.c $(all_make_files) |$(BINARYDIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -MD -MF $(@:.o=.dep)
 
@@ -203,10 +199,6 @@ $(BINARYDIR)/Net_Conf.o : Midware/Net_Conf.c $(all_make_files) |$(BINARYDIR)
 
 
 $(BINARYDIR)/protect.o : Midware/protect.c $(all_make_files) |$(BINARYDIR)
-	$(CC) $(CFLAGS) -c $< -o $@ -MD -MF $(@:.o=.dep)
-
-
-$(BINARYDIR)/Sate_func.o : Midware/Sate_func.c $(all_make_files) |$(BINARYDIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -MD -MF $(@:.o=.dep)
 
 
@@ -251,6 +243,10 @@ $(BINARYDIR)/MxLWare_HYDRA_TsMuxCtrlApi.o : MxL582Driver/MxLWare_HYDRA_TsMuxCtrl
 
 
 $(BINARYDIR)/consTable.o : SNMP_Mib/consTable.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ -MD -MF $(@:.o=.dep)
+
+
+$(BINARYDIR)/devip.o : SNMP_Mib/devip.c $(all_make_files) |$(BINARYDIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -MD -MF $(@:.o=.dep)
 
 

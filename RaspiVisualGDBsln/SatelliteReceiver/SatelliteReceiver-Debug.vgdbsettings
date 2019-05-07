@@ -32,7 +32,7 @@
         <string>*.txt</string>
         <string>*.cmake</string>
       </FileMasks>
-      <TransferNewFilesOnly>true</TransferNewFilesOnly>
+      <TransferNewFilesOnly>false</TransferNewFilesOnly>
       <IncludeSubdirectories>true</IncludeSubdirectories>
       <SelectedDirectories />
       <DeleteDisappearedFiles>true</DeleteDisappearedFiles>
@@ -41,7 +41,7 @@
     <AllowChangingHostForMainCommands>false</AllowChangingHostForMainCommands>
     <SkipBuildIfNoSourceFilesChanged>false</SkipBuildIfNoSourceFilesChanged>
     <IgnoreFileTransferErrors>false</IgnoreFileTransferErrors>
-    <RemoveRemoteDirectoryOnClean>false</RemoveRemoteDirectoryOnClean>
+    <RemoveRemoteDirectoryOnClean>true</RemoveRemoteDirectoryOnClean>
     <SkipDeploymentTests>false</SkipDeploymentTests>
     <MainSourceDirectoryForLocalBuilds>$(ProjectDir)</MainSourceDirectoryForLocalBuilds>
   </Project>
@@ -126,7 +126,7 @@
     <PreBuildActions />
     <PostBuildActions>
       <CustomActionBase xsi:type="CommandLineAction">
-        <SkipWhenRunningCommandList>true</SkipWhenRunningCommandList>
+        <SkipWhenRunningCommandList>false</SkipWhenRunningCommandList>
         <RemoteHost>
           <HostName>192.168.1.103</HostName>
           <Transport>SSH</Transport>
