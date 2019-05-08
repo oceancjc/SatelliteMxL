@@ -252,6 +252,7 @@ void *thread_UDP(){
                 break;
             }
             else {
+                printf("UDP Buffer = %s\n",buf);
                 rcv = cmdAnalysis(buf, opcode, &opdata);
                 if (rcv == 1) {
                     if (strstr(opcode, "end")) ;
