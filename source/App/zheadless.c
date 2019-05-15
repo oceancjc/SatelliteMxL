@@ -57,6 +57,7 @@ void *thread_cpu();
 void *thread_conste0();
 void *thread_regular();
 void *thread_UDP();
+void *thred_UDPParaSend(void* arg);
 
 
 int main(){
@@ -204,6 +205,10 @@ void *thread_cpu(){
 
 }
 
+
+
+
+/* UDP Send 4 fast Parameters Part*/
 enum SOCK_STATE
 {
     SOCK_INIT = 0,
@@ -212,11 +217,20 @@ enum SOCK_STATE
     SOCK_CLOSE
 };
 
+typedef struct {
+    int sock; 
+    struct sockaddr_in* c_addr; 
+    int sleep_ms;
+    
+}UDP_PACKAGE_PARA_t;
+
 
 void *thread_UDP(){
     uint8_t state = SOCK_INIT;    int sock_client = 0;
     struct sockaddr_in server = { 0 }, client = { 0 };
+    pthread_t thread_send = 0;
     socklen_t client_addr_length = sizeof(client);
+    UDP_PACKAGE_PARA_t pack = { 0 };
     char buf[16] = { 0 };
     char opcode[16] = { 0 };
     int opdata = 0, rcv = 0;
@@ -247,28 +261,63 @@ void *thread_UDP(){
         
             case SOCK_WORK:
             if (recvfrom(sock_client, buf, sizeof(buf), 0, (struct sockaddr*)&client, &client_addr_length) < 0) {
-                //?why always 0
                 perror("Receving Failed");
                 break;
             }
             else {
                 rcv = cmdAnalysis(buf, opcode, &opdata);
                 if (rcv == 1) {
-                    if (strstr(opcode, "end")) ;
+                    if (strstr(opcode, "end")){
+                        if (thread_send) {
+                            pthread_cancel(thread_send);	
+                            thread_send = 0;
+                        }                       
+                    }
                     else    printf("Invalid Command: %s\n", opcode);
                 }
                 else if (rcv == 2) {
-                    if (strstr(opcode, "start")) ;
+                    if (strstr(opcode, "start"))
+                    {
+                        if (thread_send)
+                        {
+                            pthread_cancel(thread_send);	
+                            thread_send = 0;
+                        }
+                        pack.sleep_ms = opdata;
+                        pack.c_addr = &client;
+                        pack.sock = sock_client;
+//                        printf(" from %s\t %s ,port %d \n", inet_ntoa(pack.c_addr->sin_addr), inet_ntoa(client.sin_addr), ntohs(pack.c_addr->sin_port));
+                        if ((pthread_create(&thread_send, NULL, thred_UDPParaSend, (void*)&pack)) != 0)        printf("Thread UDP_ParaSend create fail ...\n");
+                    }
+                    else if (strstr(opcode, "bye")) {
+                        if (thread_send)
+                        {
+                            pthread_cancel(thread_send);	
+                            thread_send = 0;
+                        }
+                        memset(&pack, 0, sizeof(pack));
+                        sock_client = 0;
+                        state = SOCK_INIT; 
+                    }
                     else    printf("Invalid Command: %s, data= %d\n", opcode, opdata);
                 }
                 else    printf("Unknown received, rcv_num=%d, buf=%s\n", rcv, buf);
             }    
-        }
-        
-        
-        
+        }        
     }
-
 }
 
+
+
+void *thred_UDPParaSend(void* arg){
+    char frame[1024] = { 0 };
+    int ret = 0;
+    UDP_PACKAGE_PARA_t *pack = arg;
+    while (1){
+        ret = framerParam(dev, frame);
+        sendto(pack->sock, (void*)frame, strlen(frame), 0, (struct sockaddr*)pack->c_addr,sizeof(*pack->c_addr));
+//        printf(" from %s, port %d \n", inet_ntoa(pack->c_addr->sin_addr), ntohs(pack->c_addr->sin_port));
+        MxLWare_HYDRA_OEM_SleepInMs(pack->sleep_ms);
+    }
+}
 

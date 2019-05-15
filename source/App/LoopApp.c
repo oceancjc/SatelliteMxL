@@ -311,5 +311,5 @@ int framerParam(LoopApp_t* dev,char* frame) {
 
 int cmdAnalysis(char* cmd, char* opcode, int* opdata){
     if (opcode == NULL || opdata == NULL || cmd == NULL)    return -1;
-    return sscanf(cmd, "#$%s#$%d#$", opcode, opdata);
+    return sscanf(cmd, "#$%[^#$]#$%d#$", opcode, opdata);
 }
