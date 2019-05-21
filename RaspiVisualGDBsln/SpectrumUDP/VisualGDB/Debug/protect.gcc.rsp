@@ -1,0 +1,1 @@
+-I../../source/MxL582Driver -I../../source/Midware -I../../source/Spectrum -I../../resources/usr/local/include -ggdb -O0 -DDEBUG=1 -DDEBUG=1 -ffunction-sections -fdata-sections   -c "C:/SpectrumAnalyzer/source/Midware/protect.c" -o "VisualGDB/Debug/protect.o" -MD -MP -MF "VisualGDB/Debug/protect.dep"

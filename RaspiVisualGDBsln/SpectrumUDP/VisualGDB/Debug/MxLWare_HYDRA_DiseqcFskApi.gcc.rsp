@@ -1,0 +1,1 @@
+-I../../source/MxL582Driver -I../../source/Midware -I../../source/Spectrum -I../../resources/usr/local/include -ggdb -O0 -DDEBUG=1 -DDEBUG=1 -ffunction-sections -fdata-sections   -c "C:/SpectrumAnalyzer/source/MxL582Driver/MxLWare_HYDRA_DiseqcFskApi.c" -o "VisualGDB/Debug/MxLWare_HYDRA_DiseqcFskApi.o" -MD -MP -MF "VisualGDB/Debug/MxLWare_HYDRA_DiseqcFskApi.dep"

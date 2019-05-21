@@ -1,0 +1,1 @@
+-I../../source/MxL582Driver -I../../source/Midware -I../../source/Spectrum -I../../resources/usr/local/include -ggdb -O0 -DDEBUG=1 -DDEBUG=1 -ffunction-sections -fdata-sections   -c "C:/SpectrumAnalyzer/source/Midware/Net_Conf.c" -o "VisualGDB/Debug/Net_Conf.o" -MD -MP -MF "VisualGDB/Debug/Net_Conf.dep"

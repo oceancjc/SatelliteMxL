@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source files">
+      <UniqueIdentifier>{f72d4e0b-e7d1-40c3-b10f-34202565f1b0}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header files">
+      <UniqueIdentifier>{e88f2f87-ae78-42f0-9831-e60b68a4cb1b}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource files">
+      <UniqueIdentifier>{89812e4d-f185-4ecd-9e2c-a1a79fd01058}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="VisualGDB settings">
+      <UniqueIdentifier>{25024f4c-953a-43b1-a9f5-cd45024d38da}</UniqueIdentifier>
+      <Extensions>vgdbsettings</Extensions>
+    </Filter>
+    <Filter Include="Source files\source">
+      <UniqueIdentifier>{c2278f4e-a82c-4f75-9afc-f0c3c93d7ce0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\source\Midware">
+      <UniqueIdentifier>{30f51578-6c8c-43ed-8d13-22cb37f4b16b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\source\MxL582Driver">
+      <UniqueIdentifier>{090d0d7b-cc48-4277-a373-60f69ef51ef9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\source\Spectrum">
+      <UniqueIdentifier>{d7a8b98f-ad33-416a-b2b9-20bd96145340}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\source">
+      <UniqueIdentifier>{efe845f5-2001-4afb-a5bd-fdce3fc533a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\source\Midware">
+      <UniqueIdentifier>{6d8f200a-c828-49e3-83e4-83777969f1f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\source\MxL582Driver">
+      <UniqueIdentifier>{770bb692-e792-4050-a717-42ac528e0460}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\source\SNMP_Mib">
+      <UniqueIdentifier>{345292d9-efcd-4b53-9495-9a2a253fc84b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\source\Spectrum">
+      <UniqueIdentifier>{dceba4cd-5224-4746-8534-10accc082fbd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SpectrumUDP-Debug.vgdbsettings">
+      <Filter>VisualGDB settings</Filter>
+    </None>
+    <None Include="SpectrumUDP-Release.vgdbsettings">
+      <Filter>VisualGDB settings</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\source\Midware\gpio_i2c.c">
+      <Filter>Source files\source\Midware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Midware\Net_Conf.c">
+      <Filter>Source files\source\Midware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Midware\protect.c">
+      <Filter>Source files\source\Midware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Midware\Sate_func.c">
+      <Filter>Source files\source\Midware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\MxL582Driver\MxLWare_FW_Download.c">
+      <Filter>Source files\source\MxL582Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\MxL582Driver\MxLWare_HYDRA_BERTApi.c">
+      <Filter>Source files\source\MxL582Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\MxL582Driver\MxLWare_HYDRA_ChanBondApi.c">
+      <Filter>Source files\source\MxL582Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\MxL582Driver\MxLWare_HYDRA_CommonApi.c">
+      <Filter>Source files\source\MxL582Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\MxL582Driver\MxLWare_HYDRA_DemodTunerApi.c">
+      <Filter>Source files\source\MxL582Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\MxL582Driver\MxLWare_HYDRA_DeviceApi.c">
+      <Filter>Source files\source\MxL582Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\MxL582Driver\MxLWare_HYDRA_DiseqcFskApi.c">
+      <Filter>Source files\source\MxL582Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\MxL582Driver\MxLWare_HYDRA_OEM_Drv.c">
+      <Filter>Source files\source\MxL582Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\MxL582Driver\MxLWare_HYDRA_PhyCtrl.c">
+      <Filter>Source files\source\MxL582Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\MxL582Driver\MxLWare_HYDRA_TsMuxCtrlApi.c">
+      <Filter>Source files\source\MxL582Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Spectrum\zheadless.c">
+      <Filter>Source files\source\Spectrum</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\source\Midware\gpio_i2c.h">
+      <Filter>Header files\source\Midware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Midware\Net_Conf.h">
+      <Filter>Header files\source\Midware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Midware\protect.h">
+      <Filter>Header files\source\Midware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Midware\Sate_func.h">
+      <Filter>Header files\source\Midware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\MxL582Driver\MaxLinearDataTypes.h">
+      <Filter>Header files\source\MxL582Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\MxL582Driver\MaxLinearDebug.h">
+      <Filter>Header files\source\MxL582Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\MxL582Driver\MxLDvb.h">
+      <Filter>Header files\source\MxL582Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_FW_Download.h">
+      <Filter>Header files\source\MxL582Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_BERTApi.h">
+      <Filter>Header files\source\MxL582Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_ChanBondApi.h">
+      <Filter>Header files\source\MxL582Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_Commands.h">
+      <Filter>Header files\source\MxL582Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_CommonApi.h">
+      <Filter>Header files\source\MxL582Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_DemodTunerApi.h">
+      <Filter>Header files\source\MxL582Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_DeviceApi.h">
+      <Filter>Header files\source\MxL582Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_DiseqcFskApi.h">
+      <Filter>Header files\source\MxL582Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_OEM_Defines.h">
+      <Filter>Header files\source\MxL582Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_OEM_Drv.h">
+      <Filter>Header files\source\MxL582Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_PhyCtrl.h">
+      <Filter>Header files\source\MxL582Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_ProductId.h">
+      <Filter>Header files\source\MxL582Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_Registers.h">
+      <Filter>Header files\source\MxL582Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_SkuFeatures.h">
+      <Filter>Header files\source\MxL582Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_TsMuxCtrlApi.h">
+      <Filter>Header files\source\MxL582Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\MxL582Driver\MxL_HYDRA_Diag_Commands.h">
+      <Filter>Header files\source\MxL582Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\MxL582Driver\MxL_HYDRA_MxLWare.h">
+      <Filter>Header files\source\MxL582Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\SNMP_Mib\consTable.h">
+      <Filter>Header files\source\SNMP_Mib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\SNMP_Mib\devip.h">
+      <Filter>Header files\source\SNMP_Mib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\SNMP_Mib\sateTable.h">
+      <Filter>Header files\source\SNMP_Mib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\SNMP_Mib\satethTable.h">
+      <Filter>Header files\source\SNMP_Mib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\SNMP_Mib\sysdescr.h">
+      <Filter>Header files\source\SNMP_Mib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\SNMP_Mib\trap.h">
+      <Filter>Header files\source\SNMP_Mib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\SNMP_Mib\udpTable.h">
+      <Filter>Header files\source\SNMP_Mib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Spectrum\globals.h">
+      <Filter>Header files\source\Spectrum</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

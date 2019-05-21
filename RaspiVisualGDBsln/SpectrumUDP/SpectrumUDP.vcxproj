@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|VisualGDB">
+      <Configuration>Debug</Configuration>
+      <Platform>VisualGDB</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|VisualGDB">
+      <Configuration>Release</Configuration>
+      <Platform>VisualGDB</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>14.0</VCProjectVersion>
+    <ProjectGuid>{5D3CD36E-1D3E-415C-B53F-C45641F96E1F}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
+    <GNUConfigurationType>Debug</GNUConfigurationType>
+    <ToolchainID>com.visualgdb.raspberry_pi</ToolchainID>
+    <ToolchainVersion>6.3.0/7.12/r3</ToolchainVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
+    <ToolchainID>com.visualgdb.raspberry_pi</ToolchainID>
+    <ToolchainVersion>6.3.0/7.12/r3</ToolchainVersion>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../../source/MxL582Driver;../../source/Midware;../../source/Spectrum;../../resources/usr/local/include;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DEBUG=1;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalLinkerInputs>;%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
+      <LibrarySearchDirectories>../../resources/usr/local/lib;%(Link.LibrarySearchDirectories)</LibrarySearchDirectories>
+      <AdditionalLibraryNames>wiringPi;pthread;%(Link.AdditionalLibraryNames)</AdditionalLibraryNames>
+      <LinkerScript />
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="SpectrumUDP-Debug.vgdbsettings" />
+    <None Include="SpectrumUDP-Release.vgdbsettings" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\source\Midware\gpio_i2c.c" />
+    <ClCompile Include="..\..\source\Midware\Net_Conf.c" />
+    <ClCompile Include="..\..\source\Midware\protect.c" />
+    <ClCompile Include="..\..\source\Midware\Sate_func.c" />
+    <ClCompile Include="..\..\source\MxL582Driver\MxLWare_FW_Download.c" />
+    <ClCompile Include="..\..\source\MxL582Driver\MxLWare_HYDRA_BERTApi.c" />
+    <ClCompile Include="..\..\source\MxL582Driver\MxLWare_HYDRA_ChanBondApi.c" />
+    <ClCompile Include="..\..\source\MxL582Driver\MxLWare_HYDRA_CommonApi.c" />
+    <ClCompile Include="..\..\source\MxL582Driver\MxLWare_HYDRA_DemodTunerApi.c" />
+    <ClCompile Include="..\..\source\MxL582Driver\MxLWare_HYDRA_DeviceApi.c" />
+    <ClCompile Include="..\..\source\MxL582Driver\MxLWare_HYDRA_DiseqcFskApi.c" />
+    <ClCompile Include="..\..\source\MxL582Driver\MxLWare_HYDRA_OEM_Drv.c" />
+    <ClCompile Include="..\..\source\MxL582Driver\MxLWare_HYDRA_PhyCtrl.c" />
+    <ClCompile Include="..\..\source\MxL582Driver\MxLWare_HYDRA_TsMuxCtrlApi.c" />
+    <ClCompile Include="..\..\source\Spectrum\zheadless.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\source\Midware\gpio_i2c.h" />
+    <ClInclude Include="..\..\source\Midware\Net_Conf.h" />
+    <ClInclude Include="..\..\source\Midware\protect.h" />
+    <ClInclude Include="..\..\source\Midware\Sate_func.h" />
+    <ClInclude Include="..\..\source\MxL582Driver\MaxLinearDataTypes.h" />
+    <ClInclude Include="..\..\source\MxL582Driver\MaxLinearDebug.h" />
+    <ClInclude Include="..\..\source\MxL582Driver\MxLDvb.h" />
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_FW_Download.h" />
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_BERTApi.h" />
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_ChanBondApi.h" />
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_Commands.h" />
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_CommonApi.h" />
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_DemodTunerApi.h" />
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_DeviceApi.h" />
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_DiseqcFskApi.h" />
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_OEM_Defines.h" />
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_OEM_Drv.h" />
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_PhyCtrl.h" />
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_ProductId.h" />
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_Registers.h" />
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_SkuFeatures.h" />
+    <ClInclude Include="..\..\source\MxL582Driver\MxLWare_HYDRA_TsMuxCtrlApi.h" />
+    <ClInclude Include="..\..\source\MxL582Driver\MxL_HYDRA_Diag_Commands.h" />
+    <ClInclude Include="..\..\source\MxL582Driver\MxL_HYDRA_MxLWare.h" />
+    <ClInclude Include="..\..\source\SNMP_Mib\consTable.h" />
+    <ClInclude Include="..\..\source\SNMP_Mib\devip.h" />
+    <ClInclude Include="..\..\source\SNMP_Mib\sateTable.h" />
+    <ClInclude Include="..\..\source\SNMP_Mib\satethTable.h" />
+    <ClInclude Include="..\..\source\SNMP_Mib\sysdescr.h" />
+    <ClInclude Include="..\..\source\SNMP_Mib\trap.h" />
+    <ClInclude Include="..\..\source\SNMP_Mib\udpTable.h" />
+    <ClInclude Include="..\..\source\Spectrum\globals.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -6,6 +6,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SatelliteReceiver", "Satell
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fake_Detection", "Fake_Detection\Fake_Detection.vcxproj", "{A9566841-A2F0-4F55-8B80-285F87213C9B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SpectrumUDP", "SpectrumUDP\SpectrumUDP.vcxproj", "{5D3CD36E-1D3E-415C-B53F-C45641F96E1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|VisualGDB = Debug|VisualGDB
@@ -36,6 +38,16 @@ Global
 		{A9566841-A2F0-4F55-8B80-285F87213C9B}.Release|VisualGDB.ActiveCfg = Release|VisualGDB
 		{A9566841-A2F0-4F55-8B80-285F87213C9B}.Release|VisualGDB.Build.0 = Release|VisualGDB
 		{A9566841-A2F0-4F55-8B80-285F87213C9B}.Release|x86.ActiveCfg = Release|VisualGDB
+		{5D3CD36E-1D3E-415C-B53F-C45641F96E1F}.Debug|VisualGDB.ActiveCfg = Debug|VisualGDB
+		{5D3CD36E-1D3E-415C-B53F-C45641F96E1F}.Debug|VisualGDB.Build.0 = Debug|VisualGDB
+		{5D3CD36E-1D3E-415C-B53F-C45641F96E1F}.Debug|x86.ActiveCfg = Debug|VisualGDB
+		{5D3CD36E-1D3E-415C-B53F-C45641F96E1F}.Release_READ|VisualGDB.ActiveCfg = Release|VisualGDB
+		{5D3CD36E-1D3E-415C-B53F-C45641F96E1F}.Release_READ|VisualGDB.Build.0 = Release|VisualGDB
+		{5D3CD36E-1D3E-415C-B53F-C45641F96E1F}.Release_READ|x86.ActiveCfg = Debug|VisualGDB
+		{5D3CD36E-1D3E-415C-B53F-C45641F96E1F}.Release_READ|x86.Build.0 = Debug|VisualGDB
+		{5D3CD36E-1D3E-415C-B53F-C45641F96E1F}.Release|VisualGDB.ActiveCfg = Release|VisualGDB
+		{5D3CD36E-1D3E-415C-B53F-C45641F96E1F}.Release|VisualGDB.Build.0 = Release|VisualGDB
+		{5D3CD36E-1D3E-415C-B53F-C45641F96E1F}.Release|x86.ActiveCfg = Release|VisualGDB
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

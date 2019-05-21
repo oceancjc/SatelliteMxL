@@ -234,6 +234,7 @@ void *thread_UDP(){
     char buf[16] = { 0 };
     char opcode[16] = { 0 };
     int opdata = 0, rcv = 0;
+    pthread_detach(pthread_self());
     while (1){
         switch (state){
             case SOCK_INIT:
@@ -270,6 +271,7 @@ void *thread_UDP(){
                     if (strstr(opcode, "end")){
                         if (thread_send) {
                             pthread_cancel(thread_send);	
+                            printf("Parameter send process ends ...\n");
                             thread_send = 0;
                         }                       
                     }
@@ -313,11 +315,13 @@ void *thred_UDPParaSend(void* arg){
     char frame[1024] = { 0 };
     int ret = 0;
     UDP_PACKAGE_PARA_t *pack = arg;
+    pthread_detach(pthread_self());
     while (1){
         ret = framerParam(dev, frame);
         sendto(pack->sock, (void*)frame, strlen(frame), 0, (struct sockaddr*)pack->c_addr,sizeof(*pack->c_addr));
 //        printf(" from %s, port %d \n", inet_ntoa(pack->c_addr->sin_addr), ntohs(pack->c_addr->sin_port));
         MxLWare_HYDRA_OEM_SleepInMs(pack->sleep_ms);
+        pthread_testcancel();
     }
 }
 
