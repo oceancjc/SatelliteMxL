@@ -80,7 +80,7 @@ MXL_STATUS_E MxL_582_Init(unsigned char devId, oem_data_t* oemdata){
     MxLWare_HYDRA_OEM_SleepInMs(500);
     
     
-    if ((status = MxLWare_HYDRA_API_CfgTunerEnable(devId, MXL_HYDRA_TUNER_ID_1, MXL_ENABLE)) != MXL_SUCCESS) {
+    if ((status = MxLWare_HYDRA_API_CfgTunerEnable(devId, MXL_HYDRA_TUNER_ID_2, MXL_ENABLE)) != MXL_SUCCESS) {
         printf("Error status of CfgTunerEnable_1 is %d\n", status);
         return status;        
     }        
@@ -91,7 +91,7 @@ MXL_STATUS_E MxL_582_Init(unsigned char devId, oem_data_t* oemdata){
         return status;        
     }  
 
-    if ((status = MxLWare_HYDRA_API_ReqTunerEnableStatus(devId, MXL_HYDRA_TUNER_ID_1, &tunerEnable1)) != MXL_SUCCESS) {
+    if ((status = MxLWare_HYDRA_API_ReqTunerEnableStatus(devId, MXL_HYDRA_TUNER_ID_2, &tunerEnable1)) != MXL_SUCCESS) {
         printf("Error status of Get TunerEnable_status is %d\n", status);
         return status;        
     }   
