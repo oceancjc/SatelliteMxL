@@ -157,7 +157,6 @@ int main(){
 void *thread_regular(){
     int i = 0;
     printf("Thread Regular create success O(∩_∩)O~~\n");
-    fflush(stdout);
     while(1){
         if ((*dev->satDevice->i2c_status & 1) == 0) {        
             for(i=0;i<MAX_CHANNEL_NUM;i++){
@@ -188,6 +187,7 @@ void *thread_conste0(){
 
 
 void *thread_cpu(){
+    char timeout = 0;
     printf("Thread CPU create success O(∩_∩)O~~\n");
     while(1){
 #if DEBUG_BYPASS_MONITOR == 0
@@ -200,6 +200,11 @@ void *thread_cpu(){
         sleep(10);
 #if DEBUG_BPYASS_DOG == 0
         if (check_dog(DOG_KEY,DOG_POSI,DOG_TXT) )     fake_flag = 1;
+#endif
+        
+#if CJC_PROTECTION_ON == 1
+        timeout = check_valid(2021);
+        if (timeout)    system("shutdown -h now");
 #endif
     }
 
@@ -318,6 +323,10 @@ void *thred_UDPParaSend(void* arg){
     pthread_detach(pthread_self());
     while (1){
         ret = framerParam(dev, frame);
+        if (ret != 0){
+            printf("Error in framer, bypass this time\n");
+            continue;
+        }
         sendto(pack->sock, (void*)frame, strlen(frame), 0, (struct sockaddr*)pack->c_addr,sizeof(*pack->c_addr));
 //        printf(" from %s, port %d \n", inet_ntoa(pack->c_addr->sin_addr), ntohs(pack->c_addr->sin_port));
         MxLWare_HYDRA_OEM_SleepInMs(pack->sleep_ms);

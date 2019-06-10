@@ -1,11 +1,12 @@
 #ifndef PROTECT_H
 #define PROTECT_H
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<time.h>
-#include<sys/time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdint.h>
+#include <time.h>
+#include <sys/time.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -23,7 +24,7 @@ extern char check_vali_timecut(char* path, int time_s);
 extern char check_running(char* app);
 extern void cod_serial_mac(char *code, char *key);
 extern void dec_serial_mac(char *code, char*key, char*serial, char* mac);
-    
+extern char check_valid(uint16_t year_out);
     
 #ifdef __cplusplus
 }

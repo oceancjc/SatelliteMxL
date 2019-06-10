@@ -29,7 +29,7 @@ extern "C" {
 #define MAX_CHANNEL_NUM    (8)
 #define MAX_TRAP_NUM       (4)
 #define MAX_UDP_ADDR       (4)
-#define FFT_FREAME_LEN    (1024)
+#define FFT_FREAME_LEN    (300)
 #define CONST_LEN         (256)
 #define INTERVAL_MS       (100)
     

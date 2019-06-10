@@ -1,0 +1,1 @@
+-I../../source/MxL582Driver -I../../source/Midware -I../../source/Spectrum -I../../resources/usr/local/include -ggdb -O3 -DNDEBUG=1 -DRELEASE=1 -DNDEBUG=1 -DRELEASE=1 -ffunction-sections -fdata-sections   -c "C:/SpectrumAnalyzer/source/Spectrum/zheadless.c" -o "VisualGDB/Release/zheadless.o" -MD -MP -MF "VisualGDB/Release/zheadless.dep"

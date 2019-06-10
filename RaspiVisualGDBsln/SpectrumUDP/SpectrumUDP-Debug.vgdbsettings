@@ -107,12 +107,13 @@
     </PreBuildActions>
     <PostBuildActions>
       <CustomActionBase xsi:type="CommandLineAction">
-        <SkipWhenRunningCommandList>false</SkipWhenRunningCommandList>
+        <SkipWhenRunningCommandList>true</SkipWhenRunningCommandList>
         <Command>rd</Command>
         <Arguments>/s/q usr</Arguments>
         <WorkingDirectory>C:\SpectrumAnalyzer\resources</WorkingDirectory>
         <Environment>
           <Records />
+          <EnvironmentSetupFiles />
         </Environment>
         <BackgroundMode>false</BackgroundMode>
       </CustomActionBase>

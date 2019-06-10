@@ -220,10 +220,10 @@ char check_running(char* app){	//No running return 0 or return 1
 }
 
 
-char check_valid(){
+char check_valid(uint16_t year_out){
     struct tm *t = NULL;    time_t tt = 0;
-    time(&tt);
-    if(t->tm_year > 117)            return 1;  //2017-1900
+    t = localtime(&tt);
+    if( t->tm_year > (year_out-1900) )            return 1;  //2017-1900
     return 0;
 }
 

@@ -35,6 +35,9 @@ VisualGDB/Debug/protect.o: C:/SpectrumAnalyzer/source/Midware/protect.c \
  c:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot\usr\include\arm-linux-gnueabihf/bits/stdlib-float.h \
  c:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot\usr\include/string.h \
  c:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot\usr\include/xlocale.h \
+ c:\sysgcc\raspberry\lib\gcc\arm-linux-gnueabihf\6\include/stdint.h \
+ c:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot\usr\include/stdint.h \
+ c:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot\usr\include\arm-linux-gnueabihf/bits/wchar.h \
  c:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot\usr\include\arm-linux-gnueabihf/sys/time.h \
  c:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot\usr\include/unistd.h \
  c:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot\usr\include\arm-linux-gnueabihf/bits/posix_opt.h \
@@ -113,6 +116,12 @@ c:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot\usr\include\arm-linux-gnueabihf/
 c:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot\usr\include/string.h:
 
 c:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot\usr\include/xlocale.h:
+
+c:\sysgcc\raspberry\lib\gcc\arm-linux-gnueabihf\6\include/stdint.h:
+
+c:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot\usr\include/stdint.h:
+
+c:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot\usr\include\arm-linux-gnueabihf/bits/wchar.h:
 
 c:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot\usr\include\arm-linux-gnueabihf/sys/time.h:
 

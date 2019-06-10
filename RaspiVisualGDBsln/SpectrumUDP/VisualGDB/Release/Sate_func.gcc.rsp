@@ -1,0 +1,1 @@
+-I../../source/MxL582Driver -I../../source/Midware -I../../source/Spectrum -I../../resources/usr/local/include -ggdb -O3 -DNDEBUG=1 -DRELEASE=1 -DNDEBUG=1 -DRELEASE=1 -ffunction-sections -fdata-sections   -c "C:/SpectrumAnalyzer/source/Midware/Sate_func.c" -o "VisualGDB/Release/Sate_func.o" -MD -MP -MF "VisualGDB/Release/Sate_func.dep"

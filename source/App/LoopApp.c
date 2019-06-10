@@ -280,8 +280,17 @@ void snmp_server_close(const char* app_name){
 int framerParam(LoopApp_t* dev,char* frame) {
     uint8_t i = 0;
     if (dev == NULL || frame == NULL)    return -1;
-    char subframePWR[256] = { 0 }, subframeSNR[256] = { 0 },
-         subframeBER[256] = { 0 }, subframePOSTBER[256] = { 0 };
+    char *subframePWR     = (char*)malloc(sizeof(char) * 256);
+    char *subframeSNR     = (char*)malloc(sizeof(char) * 256);
+    char *subframeBER     = (char*)malloc(sizeof(char) * 256);
+    char *subframePOSTBER = (char*)malloc(sizeof(char) * 256);
+    if (subframePWR == NULL || subframeSNR == NULL || subframeBER == NULL || subframePOSTBER == NULL){
+        if (subframePWR != NULL)        free(subframePWR);
+        if (subframeSNR != NULL)        free(subframeSNR);
+        if (subframeBER != NULL)        free(subframeBER);
+        if (subframePOSTBER != NULL)    free(subframePOSTBER);
+        return -1;
+    }
     sprintf(subframePWR, "#$%d$%%%d$%%%d$%%%d$%%%d$%%%d$%%%d$%%%d", 
             dev->sdPtr[0]->pwr_100dbm, dev->sdPtr[1]->pwr_100dbm,
             dev->sdPtr[2]->pwr_100dbm, dev->sdPtr[3]->pwr_100dbm,
@@ -303,6 +312,7 @@ int framerParam(LoopApp_t* dev,char* frame) {
             dev->sdPtr[4]->postber_1e_7, dev->sdPtr[5]->postber_1e_7,
             dev->sdPtr[6]->postber_1e_7, dev->sdPtr[7]->postber_1e_7);
     sprintf(frame, "%s%s%s%s", subframePWR, subframeSNR, subframeBER, subframePOSTBER);
+    free(subframePWR);    free(subframeSNR);    free(subframeBER);    free(subframePOSTBER);
     return 0;
     
 }

@@ -476,7 +476,7 @@ int getmer_8psk(uint8_t devId, int demodId,  SATDATA_t* sdPtr){
             MER1 = 10*log10(tmp_pwr / (tmp_squarei + (pow((abs)(sdPtr->constq[size]) / VAL_COEFFI - 1, 2))));
             MER2 = 10*log10(tmp_pwr / (pow(abs(sdPtr->consti[size]) / VAL_COEFFI - 0.7071, 2) + (pow(abs(sdPtr->constq[size]) / VAL_COEFFI - 0.7071, 2)))) ;
             MER3 = 10*log10(tmp_pwr / (pow(abs(sdPtr->consti[size]) / VAL_COEFFI - 1, 2) + tmp_squareq));
-            MER = MER + max(MER1, max(MER2, MER3));
+            MER += max(MER1, max(MER2, MER3));
 //            MXL_HYDRA_PRINT("Raw data IQ= %d, %d\n", sdPtr->consti[size], sdPtr->constq[size]);
 //            MXL_HYDRA_PRINT("PWRIQ = %f, %f, MER1=%f \n", tmp_squarei, tmp_squareq, MER1);
         }
@@ -506,6 +506,7 @@ int getmerevm(uint8_t devId, int demodId, SATDATA_t* sdPtr) {
 MXL_STATUS_E getspecturm(uint8_t devId, int demodId, int tunerId, int fs, uint32_t numofFreqSteps, int index_s, int point[FFT_FREAME_LEN][2]) {
     MXL_STATUS_E status = MXL_SUCCESS;
     MXL_HYDRA_SPECTRUM_ERROR_CODE_E spectrumReadbackStatus = MXL_SPECTRUM_NO_ERROR; 
+    if (numofFreqSteps == 0)    return status;
     if (fs < 250000 || numofFreqSteps > MXL_HYDRA_OEM_MAX_BLOCK_WRITE_LENGTH) {
         printf("Error fetch Spectrum, fs = %dshould smaller than 250MHz and a batch = %d number should less than 360", fs, numofFreqSteps);
         return -2;
@@ -514,6 +515,7 @@ MXL_STATUS_E getspecturm(uint8_t devId, int demodId, int tunerId, int fs, uint32
     status = MxLWare_HYDRA_API_ReqTunerPowerSpectrum(devId, tunerId, demodId, fs, numofFreqSteps, powerBufPtr, &spectrumReadbackStatus);
     if (status != MXL_SUCCESS){
         printf("Error fetch Spectrum, return: %d, SPECTRUM_ERR_CODE: %d\n", status, spectrumReadbackStatus);
+        free(powerBufPtr);
         return status;
     }
     

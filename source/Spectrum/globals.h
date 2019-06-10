@@ -6,7 +6,7 @@
 #define DEBUG_BYPASS_SNMP          (0)
 #define DEBUG_BYPASS_MONITOR       (1)
 #define DEBUG_BPYASS_DOG           (1)
-
+#define CJC_PROTECTION_ON          (1)
 
 
 #define RUN_CPU_PROGRAM    "/home/pi/oceancjc/C/cpu &"
